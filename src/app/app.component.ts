@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Restaurant } from './model/restaurant.model';
+import { RestaurantService } from './services/restaurant.service';
 
 @Component({
   selector: 'app-root',
@@ -7,16 +8,25 @@ import { Restaurant } from './model/restaurant.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'restaurant_client';
 
-  list: Restaurant[] = [
-    {
-      id: 1, 
-      name: "toto"
-    }, 
-    {
-      id: 2, 
-      name: "coucou"
-    }
-  ];
+  restaurants: Restaurant[] = [];
+
+
+  constructor(private service : RestaurantService) { 
+    this.getRestaurants(); 
+  }
+
+  getRestaurants(){
+    this.service.getRestaurants()
+    .subscribe({
+      next: restaurantsList => this.restaurants = restaurantsList,
+      error: err => alert("echec"),
+    });
+  }
+
+
+
+ 
 }
