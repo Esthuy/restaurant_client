@@ -1,0 +1,82 @@
+<h4>Ajouter un restaurant</h4>
+
+<form [formGroup]="restaurantInsertForm" (ngSubmit)="onSubmit()">
+
+    <div>
+        <label for="restaurant-name">Nom du restaurant</label>
+        <span *ngIf="restaurantInsertForm.controls['name'].errors?.['required']" class="errors">* </span><br>
+
+        <input type="text" id="restaurant-name" formControlName="name">
+        
+        <p *ngIf="restaurantInsertForm.controls['name'].errors?.['notBlank']" class="errors"> 
+            {{ restaurantInsertForm.controls['name'].errors?.['notBlank'].message }} 
+        </p>
+
+        <p *ngIf="restaurantInsertForm.controls['name'].errors?.['maxlength']" class="errors">La longueur maximum est de 30 charactères</p><br>
+       
+    </div>
+  
+
+    <br>
+    <div>
+        <label for="restaurant-description">Déscription</label><br>
+
+        <input type="text" id="restaurant-description" formControlName="description">
+      
+        <p *ngIf="restaurantInsertForm.controls['description'].errors?.['notBlank']" class="errors"> 
+            {{ restaurantInsertForm.controls['description'].errors?.['notBlank'].message }} 
+        </p>
+        <p *ngIf="restaurantInsertForm.controls['description'].errors?.['maxlength']" class="errors">La longueur maximum est de 100 charactères</p><br>
+    </div>
+    <br>
+
+    <div>
+        <label for="restaurant-typeOfFood">Type de nourriture proposé</label>
+        <span *ngIf="restaurantInsertForm.controls['typeOfFood'].errors?.['required']" class="errors">* </span><br>
+
+        <input type="text" id="restaurant-typeOfFood" formControlName="typeOfFood">
+      
+          
+        <p *ngIf="restaurantInsertForm.controls['typeOfFood'].errors?.['notBlank']" class="errors"> 
+            {{ restaurantInsertForm.controls['typeOfFood'].errors?.['notBlank'].message }} 
+        </p>
+        <p *ngIf="restaurantInsertForm.controls['typeOfFood'].errors?.['maxlength']" class="errors">La longueur maximum est de 20 charactères</p><br>
+    </div>
+    <br>
+
+    <div>
+        <label for="restaurant-address">Adresse</label>
+        <span *ngIf="restaurantInsertForm.controls['address'].errors?.['required']" class="errors">* </span><br>
+
+        <input type="text" id="restaurant-address" formControlName="address">
+   
+        <p *ngIf="restaurantInsertForm.controls['address'].errors?.['notBlank']" class="errors"> 
+            {{ restaurantInsertForm.controls['address'].errors?.['notBlank'].message }} 
+        </p>
+        <p *ngIf="restaurantInsertForm.controls['address'].errors?.['maxlength']" class="errors">La longueur maximum est de 100 charactères</p><br>
+    </div>
+    <br>
+
+    <div>
+        <label for="restaurant-phoneNumber">Numéro de téléphone</label>
+        <span *ngIf="restaurantInsertForm.controls['phoneNumber'].errors?.['required']" class="errors">* </span><br>
+
+        <input type="text" id="restaurant-phoneNumber" formControlName="phoneNumber">
+       
+        <p *ngIf="restaurantInsertForm.controls['phoneNumber'].errors?.['notBlank']" class="errors"> 
+            {{ restaurantInsertForm.controls['phoneNumber'].errors?.['notBlank'].message }} 
+        </p>
+        <p *ngIf="restaurantInsertForm.controls['phoneNumber'].errors?.['maxlength'] " class="errors">La longueur maximum est de 20 charactères</p><br>
+    </div>
+
+   
+ 
+<br><br>
+
+    <button type="submit">Insérer</button>
+    <br>
+
+</form>
+
+<p>* = Ce champ est obligatoire</p>
+

@@ -22,4 +22,16 @@ export class RestaurantService {
   getOneRestaurant(id : number): Observable<Restaurant>{
     return this.client.get<Restaurant>(this.BASE_URL + "/" + id)
   }
+
+  // POST
+  createRestaurant(restaurant : Restaurant){
+    return this.client.post<Restaurant>(this.BASE_URL + "/add" , restaurant);
+  }
+
+  // DELETE
+  deleteRestaurant(id : number){
+    return this.client.delete<Restaurant>(this.BASE_URL + "/" + id)
+  }
+
+  
 }

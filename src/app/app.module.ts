@@ -7,6 +7,9 @@ import { AccueilComponent } from './component/accueil/accueil.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DisplayAllComponent } from './component/display-all/display-all.component';
 import { DisplayOneComponent } from './component/display-one/display-one.component';
+import { AddOneRestaurantComponent } from './component/add-one-restaurant/add-one-restaurant.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -14,13 +17,15 @@ import { DisplayOneComponent } from './component/display-one/display-one.compone
     AppComponent,
     AccueilComponent,
     DisplayAllComponent, 
-    DisplayOneComponent
+    DisplayOneComponent,
+    AddOneRestaurantComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
     HttpClientModule , 
-   
+    FormsModule, 
+    ReactiveFormsModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -29,4 +29,11 @@ export class DisplayAllComponent  {
     this.router.navigate(['restaurant', restaurant.id]);
   }
 
+  deleteRestaurant(restaurant: Restaurant){
+    if(confirm("Êtes vous sur de vouloir supprimer ce restaurant ?")){
+      this.service.deleteRestaurant(restaurant.id).subscribe({
+        next: () => this.getRestaurants()
+      }); 
+    } ;
+  }
 }

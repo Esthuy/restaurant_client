@@ -29,6 +29,8 @@ export class DisplayOneComponent implements OnInit {
     }; 
    
 
+  
+
   ngOnInit(): void {
   }
 
