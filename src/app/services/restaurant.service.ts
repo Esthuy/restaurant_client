@@ -17,4 +17,9 @@ export class RestaurantService {
   getRestaurants(): Observable<Restaurant[]>{
     return this.client.get<Restaurant[]>(this.BASE_URL)
   }
+
+  // GET ONE 
+  getOneRestaurant(id : number): Observable<Restaurant>{
+    return this.client.get<Restaurant>(this.BASE_URL + "/" + id)
+  }
 }

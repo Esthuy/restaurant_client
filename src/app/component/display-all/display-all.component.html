@@ -1,0 +1,16 @@
+<p>display-all works!</p>
+
+
+<div>
+    <p *ngFor="let restaurant of restaurants">
+         {{restaurant.id}} - {{restaurant.name}} <br>
+        Adresse : {{restaurant.address}}<br>
+        Téléphone : {{restaurant.phoneNumber}}<br>
+        Déscription : {{restaurant.description}}<br>
+        Type de nourriture : {{restaurant.typeOfFood}}<br>
+  
+        <button (click)="displayRestaurant(restaurant)">Afficher</button>
+  
+  
+    </p>
+  </div>

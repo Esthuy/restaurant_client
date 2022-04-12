@@ -5,16 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AccueilComponent } from './component/accueil/accueil.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DisplayAllComponent } from './component/display-all/display-all.component';
+import { DisplayOneComponent } from './component/display-one/display-one.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AccueilComponent
+    AccueilComponent,
+    DisplayAllComponent, 
+    DisplayOneComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
-    HttpClientModule 
+    HttpClientModule , 
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Restaurant } from './model/restaurant.model';
 import { RestaurantService } from './services/restaurant.service';
 
@@ -10,23 +11,6 @@ import { RestaurantService } from './services/restaurant.service';
 export class AppComponent {
 
   title = 'restaurant_client';
+  
 
-  restaurants: Restaurant[] = [];
-
-
-  constructor(private service : RestaurantService) { 
-    this.getRestaurants(); 
-  }
-
-  getRestaurants(){
-    this.service.getRestaurants()
-    .subscribe({
-      next: restaurantsList => this.restaurants = restaurantsList,
-      error: err => alert("echec"),
-    });
-  }
-
-
-
- 
 }
