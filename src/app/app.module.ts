@@ -8,10 +8,10 @@ import { DisplayAllComponent } from './component/display-all/display-all.compone
 import { DisplayOneComponent } from './component/display-one/display-one.component';
 import { AddOneRestaurantComponent } from './component/add-one-restaurant/add-one-restaurant.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreateAccountComponent } from './component/connexion/create-account/create-account.component';
-import { LoginComponent } from './component/connexion/login/login.component';
-import { ConnexionComponent } from './component/connexion/connexion.component';
+import { CreateAccountComponent } from './component/connection/create-account/create-account.component';
+import { LoginComponent } from './component/connection/login/login.component';
 import { HomepageComponent } from './component/homepage/homepage.component';
+import { ConnectionComponent } from './component/connection/connection.component';
 
 
 
@@ -23,7 +23,7 @@ import { HomepageComponent } from './component/homepage/homepage.component';
     AddOneRestaurantComponent,
     CreateAccountComponent,
     LoginComponent,
-    ConnexionComponent, 
+    ConnectionComponent,
     HomepageComponent
 
   ],
