@@ -1,7 +1,54 @@
-<p>create-account works!</p>
 
-<!-- <form [formGroup]="userInsertForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="userInsertForm" (ngSubmit)="onSubmit()">
+
+    <div>
+        <label for="user-name">Nom</label>
+        <span *ngIf="userInsertForm.controls['name'].errors?.['required']" class="errors">* </span><br>
+
+        <input type="text" id="user-name" formControlName="name">
+        
+        <p *ngIf="userInsertForm.controls['name'].errors?.['notBlank']" class="errors"> 
+            {{ userInsertForm.controls['name'].errors?.['notBlank'].message }} 
+        </p>
+
+        <p *ngIf="userInsertForm.controls['name'].errors?.['maxlength']" class="errors">La longueur maximum est de 30 caractères</p><br>
+       
+    </div>
+  
+
+    <br>
+    <div>
+        <label for="user-email">E-mail</label><br>
+        <span *ngIf="userInsertForm.controls['email'].errors?.['required']" class="errors">* </span><br>
+
+        <input type="text" id="user-email" formControlName="email">
+      
+        <p *ngIf="userInsertForm.controls['email'].errors?.['notBlank']" class="errors"> 
+            {{ userInsertForm.controls['email'].errors?.['notBlank'].message }} 
+        </p>
+        <p *ngIf="userInsertForm.controls['email'].errors?.['maxlength']" class="errors">La longueur maximum est de 30 caractères</p><br>
+    </div>
+    <br>
+
+
+    <div>
+        <label for="user-birthdate">Date de naissance</label>
+
+        <input type="date" id="user-birthdate" formControlName="birthdate">
+       
+        <p *ngIf="userInsertForm.controls['birthdate'].errors?.['birthdateBeforeToday']" class="errors"> 
+            {{ userInsertForm.controls['birthdate'].errors?.['birthdateBeforeToday'].message }} 
+        </p>
+    </div>
+   
+ 
+<br><br>
+
+    <button type="submit">Créer un nouveau compte</button>
+    <br>
 
 
 
-</form> -->
+</form>
+
+<p><span class="errors">*</span> Ce champ est obligatoire</p>

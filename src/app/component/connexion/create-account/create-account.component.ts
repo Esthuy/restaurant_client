@@ -22,14 +22,23 @@ export class CreateAccountComponent {
   userToAdd! : User; 
 
 
-  // onSubmit(){
-  //   if(this.userInsertForm.valid){
-  //     this.userToAdd = this.userInsertForm.value; 
-  //     this.service.createUser(this.userToAdd).subscribe(); 
-  //     this.userInsertForm.reset(); 
-  //     this.router.navigateByUrl('/restaurants'); //Où rediriger ?? 
-  //   }
-  // }; 
+  onSubmit(){
+    if(this.userInsertForm.valid){
+      this.userToAdd = this.userInsertForm.value; 
+      this.service.createUser(this.userToAdd).subscribe({
+        complete: () => {
+                  this.userInsertForm.reset();  
+                  this.router.navigateByUrl('/accueil'); //Où rediriger ?? 
+                },
+        error: err => alert("echec"),
+      }); 
+    }
+  }
 
 
 }
+
+
+
+
+
