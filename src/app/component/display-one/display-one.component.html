@@ -1,11 +1,18 @@
-<p>display-one works!</p>
+<h2>Restaurant {{restaurant.name}}</h2>
+
 
 <p>
-    {{restaurant.id}} - {{restaurant.name}} <br>
+    {{restaurant.name}} <br>
    Adresse : {{restaurant.address}}<br>
    Téléphone : {{restaurant.phoneNumber}}<br>
    Déscription : {{restaurant.description}}<br>
-   Type de nourriture : {{restaurant.typeOfFood}}
+   Type de nourriture : {{restaurant.typeOfFood}}<br><br>
+</p>
+
+<!-- Afficher seulement si connecté -->
+<div *ngIf="connected"> 
+    <Input type="text">
+    <button (click)="addReview()">Ajouter un avis</button>
+</div>
 
    
-</p>

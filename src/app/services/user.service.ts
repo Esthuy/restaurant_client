@@ -28,6 +28,7 @@ export class UserService {
     return this.client.get<User>(this.BASE_URL + "/" + id)
   }
 
+
   // POST
   createUser(user : User){
     return this.client.post<User>(this.BASE_URL + "/add" , user);
@@ -36,5 +37,12 @@ export class UserService {
   // DELETE
   deleteUser(id : number){
     return this.client.delete<User>(this.BASE_URL + "/" + id)
+  }
+
+
+  connection(mail : String, password : String){
+
+    this.connected = true; 
+    this.obsUser.next(this.connected); 
   }
 }
