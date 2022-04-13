@@ -1,4 +1,4 @@
-<p>display-all works!</p>
+<h2>Restaurants</h2>
 
 
 <div>
@@ -12,14 +12,18 @@
     </p>
   </div>
 
-  <div>
+  <div> Utilisateurs
     <p *ngFor="let user of users">
          {{user.id}} - {{user.name}} <br>
          {{user.email}}
-   
-  
-  
+    </p>
+  </div><br>
 
+  <div> Avis
+    <p *ngFor="let review of reviews">
+         {{review.id}} - {{review.title}} <br>
+         {{review.user.name}} - {{review.restaurant.name}}
     </p>
   </div>
+
 

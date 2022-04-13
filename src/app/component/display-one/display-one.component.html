@@ -7,12 +7,22 @@
    Téléphone : {{restaurant.phoneNumber}}<br>
    Déscription : {{restaurant.description}}<br>
    Type de nourriture : {{restaurant.typeOfFood}}<br><br>
+
+   <button (click)="getReviews()">Voir les avis</button>
 </p>
 
 <!-- Afficher seulement si connecté -->
 <div *ngIf="connected"> 
     <Input type="text">
     <button (click)="addReview()">Ajouter un avis</button>
+</div>
+
+<div>
+    <p *ngFor="let review of reviews">
+        {{review.title}} - {{restaurant.description}} <br>
+    
+
+   </p>
 </div>
 
    
