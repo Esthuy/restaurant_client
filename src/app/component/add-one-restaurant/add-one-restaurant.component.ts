@@ -25,10 +25,14 @@ export class AddOneRestaurantComponent implements OnInit {
   onSubmit(){
     if(this.restaurantInsertForm.valid){
       this.restaurantToAdd = this.restaurantInsertForm.value; 
-      this.service.createRestaurant(this.restaurantToAdd).subscribe(); 
-      this.restaurantInsertForm.reset(); 
-      this.service.getRestaurants; 
-      this.router.navigateByUrl('/restaurants'); 
+      this.service.createRestaurant(this.restaurantToAdd).subscribe({
+        complete: () => {
+          this.restaurantInsertForm.reset(); 
+          this.service.getRestaurants; 
+          this.router.navigateByUrl('/restaurants'); 
+        },
+        error: err => alert("echec"),
+      }); 
     }
   }; 
 
