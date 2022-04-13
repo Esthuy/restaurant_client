@@ -6,8 +6,9 @@ export const USER_INSERT_FORM = {
     
     'name': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30) , notBlank]), 
     'email' : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30) , notBlank]),
-    'birthdate' :  new FormControl(null, [birthdateBeforeToday]), 
-}; 
+    'birthdate' :  new FormControl(null, Validators.required ), 
+    'password': new FormControl(null, Validators.required)
+}
 
 function notBlank(control : AbstractControl) : ValidationErrors | null {
     if( control.value == null || control.value == "" || control.value && control.value.trim() != "") 
@@ -18,13 +19,14 @@ function notBlank(control : AbstractControl) : ValidationErrors | null {
     }
 }
 
-function birthdateBeforeToday(control : AbstractControl) : ValidationErrors | null {
-    if( control.value.birthdate < Date.now )
-       return null; 
+//Ne fonctionne pas 
+// function birthdateBeforeToday(control : AbstractControl) : ValidationErrors | null {
+//     if( control.value == null || control.value.birthdate < Date.now )
+//        return null; 
 
-    return {birthdateBeforeToday: {
-        message: 'Date de naissance invalide'
-        }
-}
+//     return {birthdateBeforeToday: {
+//         message: 'Date de naissance invalide'
+//         }
+// }
 
-}
+// }

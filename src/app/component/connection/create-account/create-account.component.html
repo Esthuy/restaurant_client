@@ -18,7 +18,7 @@
 
     <br>
     <div>
-        <label for="user-email">E-mail</label><br>
+        <label for="user-email">E-mail</label>
         <span *ngIf="userInsertForm.controls['email'].errors?.['required']" class="errors">* </span><br>
 
         <input type="text" id="user-email" formControlName="email">
@@ -33,12 +33,23 @@
 
     <div>
         <label for="user-birthdate">Date de naissance</label>
+        <span *ngIf="userInsertForm.controls['birthdate'].errors?.['required']" class="errors">* </span><br>
 
         <input type="date" id="user-birthdate" formControlName="birthdate">
        
-        <p *ngIf="userInsertForm.controls['birthdate'].errors?.['birthdateBeforeToday']" class="errors"> 
+        <!-- <p *ngIf="userInsertForm.controls['birthdate'].errors?.['birthdateBeforeToday']" class="errors"> 
             {{ userInsertForm.controls['birthdate'].errors?.['birthdateBeforeToday'].message }} 
-        </p>
+        </p> -->
+    </div>
+    <br>
+
+    
+    <div>
+        <label for="user-password">Mot de passe</label>
+        <span *ngIf="userInsertForm.controls['password'].errors?.['required']" class="errors">* </span><br>
+
+        <input type="text" id="user-password" formControlName="password">
+    
     </div>
    
  

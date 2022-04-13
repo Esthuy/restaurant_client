@@ -11,7 +11,18 @@
   
         <button (click)="displayRestaurant(restaurant)">Afficher</button>
         <button (click)="deleteRestaurant(restaurant)">Supprimer le restaurant</button>
-  
-  
+
     </p>
   </div>
+
+  <div>
+    <p *ngFor="let user of users">
+         {{user.id}} - {{user.name}} <br>
+         {{user.email}}
+   
+  
+  
+
+    </p>
+  </div>
+

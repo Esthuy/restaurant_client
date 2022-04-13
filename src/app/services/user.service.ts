@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { User } from '../model/user.model';
 
 @Injectable({
@@ -11,6 +11,11 @@ export class UserService {
   private readonly BASE_URL = "http://localhost:8080/user";
 
   constructor(private client: HttpClient) { }
+
+  connected! : boolean; 
+
+  obsUser = new Subject<boolean>(); 
+  //Ajouter dans méthode de connection obsUser.next(connected)
 
 
   // GET 

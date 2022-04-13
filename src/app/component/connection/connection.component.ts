@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-connection',
@@ -7,7 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConnectionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service : UserService) {
+    service.obsUser.subscribe(connected => this.connected = connected); 
+   }
+
+  connected!: boolean;
+  connection: boolean = false; 
+  createAccount: boolean = false; 
+
+  userName: string = "";  
+
+  login(){
+    this.connection = true; 
+  }
+
+  createUser(){
+    this.createAccount = true; 
+  }
 
   ngOnInit(): void {
   }

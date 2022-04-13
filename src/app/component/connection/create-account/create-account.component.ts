@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { USER_INSERT_FORM } from 'src/app/form/user.form';
@@ -15,7 +15,6 @@ export class CreateAccountComponent {
   userInsertForm : FormGroup; 
 
   constructor(private service : UserService, private router : Router, builder: FormBuilder) { 
-
     this.userInsertForm = builder.group(USER_INSERT_FORM); 
   }
 
@@ -28,7 +27,7 @@ export class CreateAccountComponent {
       this.service.createUser(this.userToAdd).subscribe({
         complete: () => {
                   this.userInsertForm.reset();  
-                  this.router.navigateByUrl('/accueil'); //Où rediriger ?? 
+                  this.router.navigateByUrl('/homepage'); //Où rediriger ?? 
                 },
         error: err => alert("echec"),
       }); 
