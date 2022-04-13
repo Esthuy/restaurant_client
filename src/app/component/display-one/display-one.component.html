@@ -1,28 +1,86 @@
-<h2>Restaurant {{restaurant.name}}</h2>
+
+<div *ngIf="restaurant != null">
 
 
-<p>
-    {{restaurant.name}} <br>
-   Adresse : {{restaurant.address}}<br>
-   Téléphone : {{restaurant.phoneNumber}}<br>
-   Déscription : {{restaurant.description}}<br>
-   Type de nourriture : {{restaurant.typeOfFood}}<br><br>
+    <h2>Restaurant {{restaurant.name}}</h2>
 
-   <button (click)="getReviews()">Voir les avis</button>
-</p>
+    <p>
+       Adresse : {{restaurant.address}}<br>
+       Téléphone : {{restaurant.phoneNumber}}<br>
+       Déscription : {{restaurant.description}}<br>
+       Type de nourriture : {{restaurant.typeOfFood}}<br><br>
+    
+    </p>
 
-<!-- Afficher seulement si connecté -->
-<div *ngIf="connected"> 
-    <Input type="text">
-    <button (click)="addReview()">Ajouter un avis</button>
+
+    <h3 *ngIf="restaurant.reviews.length > 0">Avis</h3>
+    <div> 
+        <p *ngFor="let review of restaurant.reviews">
+    
+            {{review.title}} - {{review.comment}} <br><br>
+    
+            <button (click)="displayReview(review)">Voir plus</button>
+        </p>
+    </div>
+
+
 </div>
 
-<div>
-    <p *ngFor="let review of reviews">
-        {{review.title}} - {{restaurant.description}} <br>
-    
 
+<div *ngIf="reviewToDisplay != null">
+    <p>
+        {{reviewToDisplay.title}} <br>
+
+        Commentaire : {{reviewToDisplay.comment}} <br>
+        Nombre d'étoiles : {{reviewToDisplay.stars}} <br>
+        Fait par : {{reviewToDisplay.user.name}}
    </p>
 </div>
+
+
+<!-- Afficher seulement si connecté -->
+<div class="form" > 
+    <form [formGroup]="reviewInsertForm" (ngSubmit)="addReview()">
+
+        <div>
+            <label for="review-title">Titre</label>
+            <span *ngIf="reviewInsertForm.controls['title'].errors?.['required']" class="errors">* </span><br>
+
+            <input type="text" id="review-title" formControlName="title">
+        </div>
+        <br>
+    
+
+        <div>
+            <label for="review-comment">Commentaire</label>
+            <span *ngIf="reviewInsertForm.controls['comment'].errors?.['required']" class="errors">* </span><br>
+    
+            <input type="text" id="review-comment" formControlName="comment">
+        </div>
+        <br>
+    
+      
+        <div>
+            <label for="review-stars">Nombre d'étoiles</label>
+            <span *ngIf="reviewInsertForm.controls['stars'].errors?.['required']" class="errors">* </span><br>
+    
+            <input type="number" id="review-stars" formControlName="stars">
+        </div>
+        <br>
+    
+      
+
+        <button type="submit"> Ajouter un avis </button>
+
+
+        <p><span class="errors">*</span> Ce champ est obligatoire</p>
+    </form>
+</div>
+
+
+
+<button (click)="return()"> Retour </button>
+   
+
 
    

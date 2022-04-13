@@ -1,3 +1,7 @@
-*{
-    text-align: center;
+.form{
+    border: solid 4px grey;
+    width: 500px; 
+    margin: 0 auto; 
 }
+
+/* Utiliser flex ? responsive ?  */
