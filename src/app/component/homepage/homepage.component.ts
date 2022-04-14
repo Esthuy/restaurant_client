@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,8 +12,12 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor() { 
+  constructor(private router: Router) { 
   
+  }
+
+  login(){
+    this.router.navigateByUrl('/connection');
   }
 
   

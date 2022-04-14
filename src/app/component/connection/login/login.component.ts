@@ -13,6 +13,11 @@ export class LoginComponent implements OnInit {
 
   userInsertForm : FormGroup; 
 
+
+  @Output('return')
+  returnEmit = new EventEmitter(); 
+
+
   constructor(private service : UserService, private router : Router, builder: FormBuilder) { 
     this.userInsertForm = builder.group(USER_INSERT_FORM); 
   } 
@@ -20,6 +25,10 @@ export class LoginComponent implements OnInit {
   onSubmit(){}
 
   ngOnInit(): void {
+  }
+
+  return(){
+    this.returnEmit.emit(); 
   }
 
 }

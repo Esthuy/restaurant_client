@@ -26,6 +26,14 @@ export class ConnectionComponent implements OnInit {
     this.createAccount = true; 
   }
 
+  hideLogin(){
+    this.connection = false; 
+  }
+
+  hideCreateAccount(){
+    this.createAccount = false; 
+  }
+
   ngOnInit(): void {
   }
 

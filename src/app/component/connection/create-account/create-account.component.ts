@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { USER_INSERT_FORM } from 'src/app/form/user.form';
@@ -12,13 +12,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CreateAccountComponent {
 
-  userInsertForm : FormGroup; 
-
   constructor(private service : UserService, private router : Router, builder: FormBuilder) { 
     this.userInsertForm = builder.group(USER_INSERT_FORM); 
   }
 
+  userInsertForm : FormGroup; 
   userToAdd! : User; 
+
+  @Output('return')
+  returnEmit = new EventEmitter(); 
 
 
   onSubmit(){
@@ -34,6 +36,10 @@ export class CreateAccountComponent {
     }
   }
 
+
+  return(){
+    this.returnEmit.emit(); 
+  }
 
 }
 

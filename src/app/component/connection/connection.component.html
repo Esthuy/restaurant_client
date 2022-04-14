@@ -11,5 +11,8 @@
 
 
 
-<app-login *ngIf="connection"></app-login>
-<app-create-account *ngIf="createAccount"></app-create-account>
+<app-login *ngIf="connection"
+    (return) = "hideLogin()" ></app-login>
+
+<app-create-account *ngIf="createAccount" 
+    (return) = "hideCreateAccount()" ></app-create-account>
