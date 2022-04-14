@@ -14,7 +14,7 @@
 
   <div> Utilisateurs
     <p *ngFor="let user of users">
-         {{user.id}} - {{user.name}} <br>
+         {{user.id}} - {{user.username}} <br>
          {{user.email}}
     </p>
   </div><br>
@@ -22,7 +22,7 @@
   <div> Avis
     <p *ngFor="let review of reviews">
          {{review.id}} - {{review.title}} <br>
-         {{review.user.name}} - {{review.restaurant.name}}
+         {{review.user.username}} - {{review.restaurant.name}}
     </p>
   </div>
 

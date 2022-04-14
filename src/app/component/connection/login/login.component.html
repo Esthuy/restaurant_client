@@ -3,13 +3,13 @@
 
   
     <div>
-        <label for="user-email">E-mail</label>
-        <span *ngIf="userInsertForm.controls['email'].errors?.['required']" class="errors">* </span><br>
+        <label for="user-username">Pseudo</label>
+        <span *ngIf="userInsertForm.controls['username'].errors?.['required']" class="errors">* </span><br>
 
-        <input type="text" id="user-email" formControlName="email">
-      
-        <p *ngIf="userInsertForm.controls['email'].errors?.['notBlank']" class="errors"> 
-            {{ userInsertForm.controls['email'].errors?.['notBlank'].message }} 
+        <input type="text" id="user-username" formControlName="username">
+        
+        <p *ngIf="userInsertForm.controls['username'].errors?.['notBlank']" class="errors"> 
+            {{ userInsertForm.controls['username'].errors?.['notBlank'].message }} 
         </p>
     </div>
     <br>
