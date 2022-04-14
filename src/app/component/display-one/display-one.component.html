@@ -38,8 +38,8 @@
 </div>
 
 
-<!-- Afficher seulement si connecté -->
-<div class="form" > 
+
+<div class="form" *ngIf="connected" > 
     <form [formGroup]="reviewInsertForm" (ngSubmit)="addReview()">
 
         <div>

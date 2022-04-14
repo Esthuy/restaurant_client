@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
     this.userInsertForm = builder.group(USER_INSERT_FORM); 
   } 
 
-  onSubmit(){}
+  connection(){
+    this.service.connection(this.userInsertForm.value.username, this.userInsertForm.value.password)
+  }
 
   ngOnInit(): void {
   }

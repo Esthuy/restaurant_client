@@ -25,7 +25,8 @@ export class CreateAccountComponent {
 
   onSubmit(){
     if(this.userInsertForm.valid){
-      this.userToAdd = this.userInsertForm.value; 
+      this.userToAdd = this.userInsertForm.value;  
+
       this.service.createUser(this.userToAdd).subscribe({
         complete: () => {
                   this.userInsertForm.reset();  

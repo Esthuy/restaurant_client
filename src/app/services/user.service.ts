@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { User } from '../model/user.model';
@@ -16,6 +16,9 @@ export class UserService {
 
   obsUser = new Subject<boolean>(); 
   //Ajouter dans méthode de connection obsUser.next(connected)
+
+  
+
 
 
   // GET 
@@ -40,9 +43,20 @@ export class UserService {
   }
 
 
-  connection(mail : String, password : String){
 
-    this.connected = true; 
-    this.obsUser.next(this.connected); 
+  connection(username : String, password : String){
+    const header = {
+      headers: new HttpHeaders()
+        .set('Authorization',  `Basic ${btoa(username.trim() +":" + password.trim())}`)
+    }
+    
+
+    this.client.get(this.BASE_URL, header).subscribe({
+      complete: () => {
+        this.connected = true; 
+        this.obsUser.next(this.connected); 
+      },
+      error: err => alert("Le pseudo ou le mot de passe est incorrect"),
+    }); 
   }
-}
+}; 

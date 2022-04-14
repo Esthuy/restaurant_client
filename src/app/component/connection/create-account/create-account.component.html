@@ -37,6 +37,10 @@
         <span *ngIf="userInsertForm.controls['birthdate'].errors?.['required']" class="errors">* </span><br>
 
         <input type="date" id="user-birthdate" formControlName="birthdate">
+
+        <p *ngIf="userInsertForm.controls['birthdate'].errors?.['birthdateBeforeToday']" class="errors"> 
+            {{ userInsertForm.controls['birthdate'].errors?.['birthdateBeforeToday'].message }} 
+        </p>
        
     </div>
     <br>
