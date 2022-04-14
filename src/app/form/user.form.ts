@@ -19,14 +19,14 @@ function notBlank(control : AbstractControl) : ValidationErrors | null {
     }
 }
 
-//Ne fonctionne pas 
-// function birthdateBeforeToday(control : AbstractControl) : ValidationErrors | null {
-//     if( control.value == null || control.value.birthdate < Date.now )
-//        return null; 
 
-//     return {birthdateBeforeToday: {
-//         message: 'Date de naissance invalide'
-//         }
-// }
+function birthdateBeforeToday(control : AbstractControl) : ValidationErrors | null {
+    if( control.value == null || control.value.birthdate < new Date )
+       return null; 
 
-// }
+    return {birthdateBeforeToday: {
+        message: 'Date de naissance invalide'
+        }
+}
+
+}
