@@ -19,6 +19,7 @@ export class DisplayOneComponent implements OnInit {
   id : number; 
   connected! : boolean; 
   reviewToDisplay! : Review; 
+  username! : String; 
 
   reviewInsertForm : FormGroup; 
   reviewToAdd! : Review; 
@@ -29,6 +30,7 @@ export class DisplayOneComponent implements OnInit {
      private router: Router) {
 
     userService.obsUserIsConnected.subscribe(connected => this.connected = connected); 
+    userService.obsUser.subscribe(username => this.username = username); 
     this.reviewInsertForm = builder.group(REVIEW_INSERT_FORM); 
 
     const param_id = route.snapshot.paramMap.get('id');
@@ -58,13 +60,21 @@ export class DisplayOneComponent implements OnInit {
     addReview(){
       if(this.reviewInsertForm.valid){
         this.reviewToAdd = this.reviewInsertForm.value; 
+
         this.reviewToAdd.restaurant = this.restaurant; 
-        this.reviewService.createReview(this.reviewToAdd).subscribe({
-          complete: () => {
-            this.reviewInsertForm.reset();  
-          },
-          error: err => alert("echec"),
+        
+        this.userService.getOneByUsername(this.username).subscribe({
+          next : (user) => this.reviewToAdd.user = user,
+          complete : () => this.reviewService.createReview(this.reviewToAdd).subscribe({
+              next: () => {
+                this.reviewInsertForm.reset();  
+              },
+              error: err => alert("echec"),
+            }),
         }); 
+       
+        
+        
     }
   }
 

@@ -1,4 +1,4 @@
-
+<!-- Display the restaurant -->
 <div *ngIf="restaurant != null">
 
 
@@ -9,36 +9,37 @@
        Téléphone : {{restaurant.phoneNumber}}<br>
        Déscription : {{restaurant.description}}<br>
        Type de nourriture : {{restaurant.typeOfFood}}<br><br>
-    
     </p>
 
 
+
+<!-- Display the reviews of this restaurant -->
     <h3 *ngIf="restaurant.reviews.length > 0">Avis</h3>
     <div> 
-        <p *ngFor="let review of restaurant.reviews">
+        <div *ngFor="let review of restaurant.reviews">
     
             {{review.title}} - {{review.comment}} <br><br>
     
             <button (click)="displayReview(review)">Voir plus</button>
-        </p>
+        </div>
     </div>
 
 
+    <!-- Display the full review if btton is clicked -->
+    <div *ngIf="reviewToDisplay != null">
+        <p>
+            {{reviewToDisplay.title}} <br>
+    
+            Commentaire : {{reviewToDisplay.comment}} <br>
+            Nombre d'étoiles : {{reviewToDisplay.stars}} <br>
+            Fait par : {{reviewToDisplay.user.username}}
+        </p>
+    </div>
 </div>
 
 
-<div *ngIf="reviewToDisplay != null">
-    <p>
-        {{reviewToDisplay.title}} <br>
 
-        Commentaire : {{reviewToDisplay.comment}} <br>
-        Nombre d'étoiles : {{reviewToDisplay.stars}} <br>
-        Fait par : {{reviewToDisplay.user.username}}
-   </p>
-</div>
-
-
-
+<!-- Display a form to add a comment if user is connected -->
 <div class="form" *ngIf="connected" > 
     <form [formGroup]="reviewInsertForm" (ngSubmit)="addReview()">
 
@@ -64,7 +65,11 @@
             <label for="review-stars">Nombre d'étoiles</label>
             <span *ngIf="reviewInsertForm.controls['stars'].errors?.['required']" class="errors">* </span><br>
     
-            <input type="number" id="review-stars" formControlName="stars">
+            <input type="number" min="0" max="5" id="review-stars" formControlName="stars"><br>
+
+            <span *ngIf="reviewInsertForm.controls['stars'].errors?.['max5Stars']" class="errors"> 
+                {{ reviewInsertForm.controls['stars'].errors?.['max5Stars'].message }} 
+            </span>
         </div>
         <br>
     

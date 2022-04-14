@@ -6,13 +6,6 @@
     <button (click)="getInfoUser()">Afficher mes informations</button>
 </p>
 
-<div *ngIf="connected && displayInfo">
-    <ul>
-        <li>Pseudo : {{user.username}}</li>
-        <li>date de naissance : {{user.birthdate}}</li>
-        <li>email : {{user.email}}</li>
-    </ul> 
-</div>
 
 
 <div *ngIf="!connected && !connection && !createAccount">
@@ -20,6 +13,24 @@
     <button (click)="login()">Se connecter</button>
     <button (click)="createUser()">Créer un compte</button>
 </div>
+
+
+
+<!-- Display user info if connected -->
+<div *ngIf="connected && displayInfo">
+    <ul>
+        <li>Pseudo : {{user.username}}</li>
+        <li>date de naissance : {{user.birthdate}}</li>
+        <li>email : {{user.email}}</li>
+    </ul> <br>
+
+    Vos commentaires : 
+    <p *ngFor="let review of user.reviews">
+        {{review.title}} <br>
+        {{review.comment}} - {{review.stars}}
+    </p>
+</div>
+
 
 
 

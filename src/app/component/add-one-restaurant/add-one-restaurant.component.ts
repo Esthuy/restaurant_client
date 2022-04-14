@@ -36,6 +36,11 @@ export class AddOneRestaurantComponent implements OnInit {
     }
   }; 
 
+  return(){
+    this.restaurantInsertForm.reset(); 
+    this.router.navigateByUrl('/restaurants'); 
+  }
+
 
   ngOnInit(): void {
   }
