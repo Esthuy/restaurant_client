@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,14 +10,19 @@ import { UserService } from 'src/app/services/user.service';
 export class ConnectionComponent implements OnInit {
 
   constructor(private service : UserService) {
-    service.obsUser.subscribe(connected => this.connected = connected); 
+    service.obsUserIsConnected.subscribe(connected => this.connected = connected); 
+    service.obsUser.subscribe(username => this.username = username); 
    }
 
   connected!: boolean;
   connection: boolean = false; 
-  createAccount: boolean = false; 
+  createAccount: boolean = false;
+  displayInfo: boolean = false; 
 
-  userName: string = "";  
+  username! : String;  
+  user!: User; 
+
+   
 
   login(){
     this.connection = true; 
@@ -35,6 +41,14 @@ export class ConnectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  getInfoUser(){
+    this.service.getOneByUsername(this.username).subscribe({
+      next : (user) => this.user = user,
+      complete : () => this.displayInfo = true,
+    })
+    
   }
 
 }

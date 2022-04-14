@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../model/user.model';
 
 @Injectable({
@@ -12,12 +12,13 @@ export class UserService {
 
   constructor(private client: HttpClient) { }
 
-  connected! : boolean; 
+  connected : boolean =false;
+  username! : String; 
 
-  obsUser = new Subject<boolean>(); 
-  //Ajouter dans méthode de connection obsUser.next(connected)
+  obsUserIsConnected = new BehaviorSubject<boolean>(this.connected); 
 
-  
+  obsUser = new BehaviorSubject<String>(this.username); 
+
 
 
 
@@ -29,6 +30,11 @@ export class UserService {
   // GET ONE 
   getOneUser(id : number): Observable<User>{
     return this.client.get<User>(this.BASE_URL + "/" + id)
+  }
+
+  // GET ONE BY USERNAME
+  getOneByUsername(username : String) : Observable<User>{
+    return this.client.get<User>(this.BASE_URL + "/username/" + username.trim()); 
   }
 
 
@@ -45,18 +51,21 @@ export class UserService {
 
 
   connection(username : String, password : String){
+    this.username = username;
+
     const header = {
       headers: new HttpHeaders()
         .set('Authorization',  `Basic ${btoa(username.trim() +":" + password.trim())}`)
     }
     
-
     this.client.get(this.BASE_URL, header).subscribe({
-      complete: () => {
+      next: () => {
         this.connected = true; 
-        this.obsUser.next(this.connected); 
+        this.obsUserIsConnected.next(this.connected);
       },
       error: err => alert("Le pseudo ou le mot de passe est incorrect"),
     }); 
+
+    this.obsUser.next(this.username); 
   }
 }; 

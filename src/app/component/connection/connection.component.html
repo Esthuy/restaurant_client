@@ -1,6 +1,18 @@
 <h2>Connexion</h2>
 
-<p *ngIf="connected">Vous êtes connecté {{userName}} </p>
+<p *ngIf="connected">Vous êtes connecté {{username}} 
+
+    <br>
+    <button (click)="getInfoUser()">Afficher mes informations</button>
+</p>
+
+<div *ngIf="connected && displayInfo">
+    <ul>
+        <li>Pseudo : {{user.username}}</li>
+        <li>date de naissance : {{user.birthdate}}</li>
+        <li>email : {{user.email}}</li>
+    </ul> 
+</div>
 
 
 <div *ngIf="!connected && !connection && !createAccount">

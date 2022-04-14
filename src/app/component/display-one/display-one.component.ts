@@ -28,7 +28,7 @@ export class DisplayOneComponent implements OnInit {
      route: ActivatedRoute, builder: FormBuilder,
      private router: Router) {
 
-    userService.obsUser.subscribe(connected => this.connected = connected); 
+    userService.obsUserIsConnected.subscribe(connected => this.connected = connected); 
     this.reviewInsertForm = builder.group(REVIEW_INSERT_FORM); 
 
     const param_id = route.snapshot.paramMap.get('id');
@@ -54,11 +54,11 @@ export class DisplayOneComponent implements OnInit {
       this.router.navigateByUrl('/restaurants');
     }
 
-        //Ne pas oublier d'ajouter le restaurant et l'user
 
     addReview(){
       if(this.reviewInsertForm.valid){
         this.reviewToAdd = this.reviewInsertForm.value; 
+        this.reviewToAdd.restaurant = this.restaurant; 
         this.reviewService.createReview(this.reviewToAdd).subscribe({
           complete: () => {
             this.reviewInsertForm.reset();  

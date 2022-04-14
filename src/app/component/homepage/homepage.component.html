@@ -2,17 +2,18 @@
 
 <h3>Bienvenue</h3>
 
-<button (click)="login()"> Se connecter/ s'inscrire </button>
+<button (click)="login()" *ngIf="!connected"> Se connecter/ s'inscrire </button>
+
+
 
 
 <h2>TODO d'Estelle</h2>
 <ul>
     <li>ajouter les valeurs du resto et du user au formReview dans display one</li>
-    <li>Connection ! </li>
-    <li>cacher mdp dans formulaire</li>
     <li>Améliorer l'affichage des erreurs dans le form (espaces trops grands)</li>
     <li>Supprimer le bouton "supprimer restaurant" quand plus besoin </li>
     <li>Effacer le form si on quitte la page ? </li>
+    <li>Confirmation mdp quand création compte ? </li>
 </ul>
 
 
