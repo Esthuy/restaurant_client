@@ -33,5 +33,9 @@ export class RestaurantService {
     return this.client.delete<Restaurant>(this.BASE_URL + "/" + id)
   }
 
+  // PUT 
+  updateRestaurant(id : number, restaurant : Restaurant){
+    return this.client.put<Restaurant>(this.BASE_URL + "/" + id, restaurant)
+  }
   
 }

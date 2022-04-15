@@ -1,58 +1,80 @@
 <!-- Display the restaurant -->
 <div *ngIf="restaurant != null">
 
-
+<br>
     <h2>Restaurant {{restaurant.name}}</h2>
 
-    <p>
-       Adresse : {{restaurant.address}}<br><br>
-       Téléphone : {{restaurant.phoneNumber}}<br><br>
-       Déscription : {{restaurant.description}}<br><br>
-       Type de nourriture : {{restaurant.typeOfFood}}<br><br>
-    </p>
-
+    <table>
+        <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Adresse</th>
+          <th scope="col">Téléphone</th>
+          <th scope="col">Description</th>
+          <th scope="col">Type de nourriture</th>
+          <th scope="col">Favoris de </th>
+        </tr>
+        </thead>
+        <tbody>
+          <td>{{restaurant.name}}</td>
+          <td>{{ restaurant.address }}</td>
+          <td>{{ restaurant.phoneNumber}}</td>
+          <td>{{ restaurant.description }}</td>
+          <td>{{ restaurant.typeOfFood}}</td>
+          <td>{{ restaurant.favoriteOf.length}} personnes</td>
+        </tbody>
+      </table><br>
 
 
 <!-- Display the reviews of this restaurant -->
-    
-    <div *ngIf="restaurant.reviews.length > 0" class="review"> 
+
+    <div *ngIf="restaurant.reviews.length > 0 && reviewToDisplay == null" class="review"> 
         <h3>Avis</h3>
-        <div *ngFor="let review of restaurant.reviews">
+        <div *ngFor="let review of restaurant.reviews"> 
     
-            {{review.title}} - {{review.comment}} <br><br>
+          <br>  {{review.title}} - {{review.stars}}/5 <br><br>
     
             <button (click)="displayReview(review)">Voir plus</button>
         </div>
     </div>
 
-
     <!-- Display the full review if btton is clicked -->
-    <div *ngIf="reviewToDisplay != null">
-        <p>
-            {{reviewToDisplay.title}} <br>
-    
-            Commentaire : {{reviewToDisplay.comment}} <br>
-            Nombre d'étoiles : {{reviewToDisplay.stars}} <br>
-            Fait par : {{reviewToDisplay.user.username}}
-        </p>
+    <div *ngIf="reviewToDisplay != null" class="reviewToDisplay">
+        <table>
+            <thead>
+            <tr>
+              <th scope="col">Titre</th>
+              <th scope="col">Commentaire</th>
+              <th scope="col">Nombre d'étoiles</th>
+              <th scope="col">Fait par</th>
+            </tr>
+            </thead>
+            <tbody>
+              <td>{{ reviewToDisplay.title}}</td>
+              <td>{{reviewToDisplay.comment}}</td>
+              <td>{{ reviewToDisplay.stars}}</td>
+              <td>{{ reviewToDisplay.user.username}}</td>
+            </tbody>
+          </table>
+        <button (click)="hideReview()">Voir la liste des avis</button>
     </div>
-</div>
 
-<div *ngIf="connected">
+<br><br>
+<div *ngIf="connected && !favorite">
     <button (click)="addToFavorites()">Ajouter à mes favoris</button>
 </div>
 
 <br><br>
 <div *ngIf="!connected">
-    <p>Connecté vous pour ajouter un comentaire ! </p>
+    <p>Connecté vous pour ajouter un avis! </p>
     <button (click)="connection()"> Connexion/inscription </button>
 </div>
 
 
-<br><br>
+<br>
 <!-- Display a form to add a comment if user is connected -->
 <div class="form" *ngIf="connected" > 
-    <h2>Ajouter un commentaire</h2>
+    <h2>Ajouter un avis</h2>
     <form [formGroup]="reviewInsertForm" (ngSubmit)="addReview()">
 
         <div>

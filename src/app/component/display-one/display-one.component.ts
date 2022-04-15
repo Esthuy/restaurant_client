@@ -19,16 +19,17 @@ export class DisplayOneComponent implements OnInit {
   restaurant! : Restaurant;  
   id : number; 
   connected! : boolean; 
-  reviewToDisplay! : Review; 
+  favorite! : boolean; 
+  reviewToDisplay! : Review |undefined; 
   username! : String; 
 
   reviewInsertForm : FormGroup; 
   reviewToAdd! : Review; 
 
-  userToUpdate! : User; 
+  user! : User; 
 
   constructor(
-     private service: RestaurantService, private userService: UserService, private reviewService : ReviewService,
+     private restaurantService: RestaurantService, private userService: UserService, private reviewService : ReviewService,
      route: ActivatedRoute, builder: FormBuilder,
      private router: Router) {
 
@@ -40,12 +41,14 @@ export class DisplayOneComponent implements OnInit {
     this.id = param_id ? parseInt(param_id) : -1;
 
     if( this.id && this.id > 0 )
-      service.getOneRestaurant(this.id).subscribe({
+      restaurantService.getOneRestaurant(this.id).subscribe({
         next: (restaurant) => this.restaurant = restaurant,
-        error: (err) => router.navigateByUrl('/restaurants')
+        error: (err) => router.navigateByUrl('/restaurants'), 
+        complete : () => this.ifFavoriteOf(),
       });
-    
-    }; 
+ 
+   
+  }
    
 
     displayReview(review : Review){
@@ -55,8 +58,22 @@ export class DisplayOneComponent implements OnInit {
       })
     }
 
+    hideReview(){
+      this.reviewToDisplay = undefined; 
+    }
+
     return(){
       this.router.navigateByUrl('/restaurants');
+    }
+
+       
+    //If the user is connected, check if the restaurant is already in the user favorites list
+    ifFavoriteOf(){
+      if(this.connected){
+        if(this.restaurant.favoriteOf.find((user) => user.username = this.username) != null){
+          this.favorite = true; 
+        }
+      }
     }
 
 
@@ -67,7 +84,6 @@ export class DisplayOneComponent implements OnInit {
     addReview(){
       if(this.reviewInsertForm.valid){
         this.reviewToAdd = this.reviewInsertForm.value; 
-
         this.reviewToAdd.restaurant = this.restaurant; 
         
         this.userService.getOneByUsername(this.username).subscribe({
@@ -82,19 +98,21 @@ export class DisplayOneComponent implements OnInit {
     }
     }
 
+
+
   addToFavorites(){
     this.userService.getOneByUsername(this.username).subscribe({
       next : (user) => {
-        this.userToUpdate = user,
-        this.userToUpdate.favorites.push(this.restaurant),
-        console.log(this.userToUpdate.favorites)},
-        
-      complete : () => {
-        this.userService.updateUser(this.userToUpdate.id, this.userToUpdate).subscribe({
-          complete : () =>  alert("Le restaurant a bien été ajouté à vos favoris"),
-          error: err => alert("echec"),
+        this.user = user,
+        this.restaurant.favoriteOf.push(this.user),
+        this.restaurantService.updateRestaurant(this.restaurant.id, this.restaurant).subscribe({
+           next : (restaurant) => this.restaurant = restaurant,
+           complete : () => {
+              alert("Le restaurant a bien été ajouté à vos favoris");
+              this.favorite = true; 
+        }
         });
-      },
+    },
       error : err => alert("echec"),
      })
   }

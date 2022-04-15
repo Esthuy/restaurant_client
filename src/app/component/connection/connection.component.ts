@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Restaurant } from 'src/app/model/restaurant.model';
 import { User } from 'src/app/model/user.model';
+import { RestaurantService } from 'src/app/services/restaurant.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,9 +12,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ConnectionComponent implements OnInit {
 
-  constructor(private service : UserService, private router : Router) {
-    service.obsUserIsConnected.subscribe(connected => this.connected = connected); 
-    service.obsUser.subscribe(username => this.username = username); 
+  constructor(private userService : UserService, private restaurantService : RestaurantService ,private router : Router ) {
+    userService.obsUserIsConnected.subscribe(connected => this.connected = connected); 
+    userService.obsUser.subscribe(username => this.username = username); 
    }
 
   connected!: boolean;
@@ -22,6 +24,7 @@ export class ConnectionComponent implements OnInit {
 
   username! : String;  
   user!: User; 
+  restaurant! : Restaurant;
 
    
 
@@ -45,7 +48,7 @@ export class ConnectionComponent implements OnInit {
   }
 
   getInfoUser(){
-    this.service.getOneByUsername(this.username).subscribe({
+    this.userService.getOneByUsername(this.username).subscribe({
       next : (user) => this.user = user,
       complete : () => this.displayInfo = true,
     })
@@ -53,6 +56,25 @@ export class ConnectionComponent implements OnInit {
 
   restaurants(){
     this.router.navigateByUrl('/restaurants'); 
+  }
+
+  deleteFavorite(id : number){
+    this.restaurantService.getOneRestaurant(id).subscribe({
+      next : (restaurant) => this.restaurant = restaurant,
+      complete : () => {
+        const indexFav = this.restaurant.favoriteOf.findIndex((user) => this.user = user); 
+        this.restaurant.favoriteOf.splice(indexFav); 
+        this.restaurantService.updateRestaurant(this.restaurant.id, this.restaurant).subscribe({
+                   next : (restaurant) => this.restaurant = restaurant,
+                   complete : () =>  this.getInfoUser(), 
+                });
+      },
+    })
+    
+  }
+
+  goToFavorite(id : number){
+    this.router.navigate(['restaurant', id]);
   }
 
 }

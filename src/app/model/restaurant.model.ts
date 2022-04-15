@@ -1,4 +1,5 @@
 import { Review } from "./review.model";
+import { User } from "./user.model";
 
 export interface Restaurant {
     id: number;
@@ -8,5 +9,6 @@ export interface Restaurant {
     address: string; 
     phoneNumber: string; 
     reviews: Review[]; 
+    favoriteOf : User[]; 
 
 }

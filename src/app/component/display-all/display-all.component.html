@@ -1,16 +1,28 @@
 <h2>Restaurants</h2>
 
+<table>
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Nom</th>
+    <th scope="col">Type de nourriture</th>
+    <th scope="col">Adresse</th>
+    <th scope="col">Voir plus</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let restaurant of restaurants; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      {{ restaurant.name }}
+    </td>
+    <td>{{ restaurant.typeOfFood}}</td>
+    <td>{{ restaurant.address }}</td>
+    <td> <button (click)="displayRestaurant(restaurant)">Afficher</button><br></td>
+  </tr>
+  </tbody>
+</table>
 
-<div>
-    <p *ngFor="let restaurant of restaurants" class="restaurant"> 
-         {{restaurant.name}} <br>
-        Type de nourriture : {{restaurant.typeOfFood}}<br><br>
-  
-        <button (click)="displayRestaurant(restaurant)">Afficher</button>
-        <!-- <button (click)="deleteRestaurant(restaurant)">Supprimer le restaurant</button> -->
-
-    </p>
-</div>
 
 <br><br>
 <button (click)="addOneRestaurant()">Ajouter un restaurant</button>
