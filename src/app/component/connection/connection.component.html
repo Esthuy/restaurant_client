@@ -3,7 +3,8 @@
 <p *ngIf="connected">Vous êtes connecté {{username}} 
 
     <br>
-    <button (click)="getInfoUser()">Afficher mes informations</button>
+    <button (click)="getInfoUser()">Afficher mes informations</button><br><br>
+    <button (click)="restaurants()">Voir les restaurants</button>
 </p>
 
 
@@ -26,16 +27,23 @@
 
     Vos commentaires : 
     <p *ngFor="let review of user.reviews">
-        {{review.title}} <br>
+        {{review.title}}<br>
         {{review.comment}} - {{review.stars}}
+    </p>
+
+    Vos favoris : 
+    <p *ngFor="let favorite of user.favorites">
+        {{favorite.name}}
     </p>
 </div>
 
 
 
-
+<!-- Display the login page -->
 <app-login *ngIf="!connected && connection"
     (return) = "hideLogin()" ></app-login>
 
+
+<!-- Display the form to create an account -->
 <app-create-account *ngIf="!connected && createAccount" 
     (return) = "hideCreateAccount()" ></app-create-account>

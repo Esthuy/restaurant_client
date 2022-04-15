@@ -48,6 +48,10 @@ export class UserService {
     return this.client.delete<User>(this.BASE_URL + "/" + id)
   }
 
+  // PUT 
+  updateUser(id : number, user : User){
+    return this.client.put<User>(this.BASE_URL + "/" + id, user)
+  }
 
 
   connection(username : String, password : String){

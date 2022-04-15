@@ -15,10 +15,10 @@
 
 button {
     display: inline-block;
-    background-color: #7c7e81;
+    background-color: #e9eaec;
     border-radius: 10px;
     border: 4px #cccccc;
-    color: #eeeeee;
+    color: #0c0c0c;
     text-align: center;
     font-size: 16px;
     padding: 5px;
@@ -32,5 +32,5 @@ button {
   }
 
   button:hover {
-    background-color: green;
+    background-color: rgb(182, 229, 182);
   }

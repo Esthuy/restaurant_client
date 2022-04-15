@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ConnectionComponent implements OnInit {
 
-  constructor(private service : UserService) {
+  constructor(private service : UserService, private router : Router) {
     service.obsUserIsConnected.subscribe(connected => this.connected = connected); 
     service.obsUser.subscribe(username => this.username = username); 
    }
@@ -48,7 +49,10 @@ export class ConnectionComponent implements OnInit {
       next : (user) => this.user = user,
       complete : () => this.displayInfo = true,
     })
-    
+  }
+
+  restaurants(){
+    this.router.navigateByUrl('/restaurants'); 
   }
 
 }

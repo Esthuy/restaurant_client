@@ -60,4 +60,8 @@ export class DisplayAllComponent  {
       }); 
     } ;
   }
+
+  addOneRestaurant(){
+    this.router.navigateByUrl("/add"); 
+  }
 }

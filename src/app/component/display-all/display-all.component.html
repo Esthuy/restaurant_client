@@ -2,15 +2,22 @@
 
 
 <div>
-    <p *ngFor="let restaurant of restaurants">
-         {{restaurant.id}} - {{restaurant.name}} <br>
+    <p *ngFor="let restaurant of restaurants" class="restaurant"> 
+         {{restaurant.name}} <br>
         Type de nourriture : {{restaurant.typeOfFood}}<br><br>
   
         <button (click)="displayRestaurant(restaurant)">Afficher</button>
-        <button (click)="deleteRestaurant(restaurant)">Supprimer le restaurant</button>
+        <!-- <button (click)="deleteRestaurant(restaurant)">Supprimer le restaurant</button> -->
 
     </p>
-  </div>
+</div>
+
+<br><br>
+<button (click)="addOneRestaurant()">Ajouter un restaurant</button>
+
+
+
+
 <!-- 
   <div> Utilisateurs
     <p *ngFor="let user of users">

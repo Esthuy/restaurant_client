@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { REVIEW_INSERT_FORM } from 'src/app/form/review.form';
 import { Restaurant } from 'src/app/model/restaurant.model';
 import { Review } from 'src/app/model/review.model';
+import { User } from 'src/app/model/user.model';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { UserService } from 'src/app/services/user.service';
@@ -23,6 +24,8 @@ export class DisplayOneComponent implements OnInit {
 
   reviewInsertForm : FormGroup; 
   reviewToAdd! : Review; 
+
+  userToUpdate! : User; 
 
   constructor(
      private service: RestaurantService, private userService: UserService, private reviewService : ReviewService,
@@ -57,6 +60,10 @@ export class DisplayOneComponent implements OnInit {
     }
 
 
+    connection(){
+      this.router.navigateByUrl('/connection'); 
+    }
+
     addReview(){
       if(this.reviewInsertForm.valid){
         this.reviewToAdd = this.reviewInsertForm.value; 
@@ -72,10 +79,24 @@ export class DisplayOneComponent implements OnInit {
               error: err => alert("echec"),
             }),
         }); 
-       
-        
-        
     }
+    }
+
+  addToFavorites(){
+    this.userService.getOneByUsername(this.username).subscribe({
+      next : (user) => {
+        this.userToUpdate = user,
+        this.userToUpdate.favorites.push(this.restaurant),
+        console.log(this.userToUpdate.favorites)},
+        
+      complete : () => {
+        this.userService.updateUser(this.userToUpdate.id, this.userToUpdate).subscribe({
+          complete : () =>  alert("Le restaurant a bien été ajouté à vos favoris"),
+          error: err => alert("echec"),
+        });
+      },
+      error : err => alert("echec"),
+     })
   }
 
     

@@ -21,11 +21,14 @@ export class HomepageComponent implements OnInit {
   connected! : boolean;  
 
 
-   
-
   login(){
     this.router.navigateByUrl('/connection');
   }
+
+  restaurants(){
+    this.router.navigateByUrl('/restaurants'); 
+  }
+
 
   
 }

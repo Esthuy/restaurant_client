@@ -5,17 +5,18 @@
     <h2>Restaurant {{restaurant.name}}</h2>
 
     <p>
-       Adresse : {{restaurant.address}}<br>
-       Téléphone : {{restaurant.phoneNumber}}<br>
-       Déscription : {{restaurant.description}}<br>
+       Adresse : {{restaurant.address}}<br><br>
+       Téléphone : {{restaurant.phoneNumber}}<br><br>
+       Déscription : {{restaurant.description}}<br><br>
        Type de nourriture : {{restaurant.typeOfFood}}<br><br>
     </p>
 
 
 
 <!-- Display the reviews of this restaurant -->
-    <h3 *ngIf="restaurant.reviews.length > 0">Avis</h3>
-    <div> 
+    
+    <div *ngIf="restaurant.reviews.length > 0" class="review"> 
+        <h3>Avis</h3>
         <div *ngFor="let review of restaurant.reviews">
     
             {{review.title}} - {{review.comment}} <br><br>
@@ -37,10 +38,21 @@
     </div>
 </div>
 
+<div *ngIf="connected">
+    <button (click)="addToFavorites()">Ajouter à mes favoris</button>
+</div>
+
+<br><br>
+<div *ngIf="!connected">
+    <p>Connecté vous pour ajouter un comentaire ! </p>
+    <button (click)="connection()"> Connexion/inscription </button>
+</div>
 
 
+<br><br>
 <!-- Display a form to add a comment if user is connected -->
 <div class="form" *ngIf="connected" > 
+    <h2>Ajouter un commentaire</h2>
     <form [formGroup]="reviewInsertForm" (ngSubmit)="addReview()">
 
         <div>
@@ -83,7 +95,7 @@
 </div>
 
 
-
+<br>
 <button (click)="return()"> Retour </button>
    
 
