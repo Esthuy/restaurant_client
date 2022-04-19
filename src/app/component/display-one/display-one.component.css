@@ -7,7 +7,7 @@
 .review{
     background-color: rgb(255, 255, 255);
     border: 2px solid grey;
-    width:30%;
+    width:20%;
     margin:  0px auto;
 }
 
@@ -29,4 +29,6 @@ table {
     width:50%;
     margin:  0px auto;
 }
+
+
 

@@ -16,7 +16,12 @@ export class ConnectionComponent implements OnInit {
   constructor(private userService : UserService, private restaurantService : RestaurantService , private reviewService : ReviewService,
     private router : Router ) {
     userService.obsUserIsConnected.subscribe(connected => this.connected = connected); 
-    userService.obsUser.subscribe(username => this.username = username); 
+    userService.obsUser.subscribe(username => {
+      this.username = username;
+      if(this.connected){
+        this.getInfoUser(); 
+      }
+    }); 
    }
 
   connected!: boolean;
@@ -50,7 +55,7 @@ export class ConnectionComponent implements OnInit {
   }
 
   getInfoUser(){
-    if(this.username != null){
+    if(this.username != null){ 
       this.userService.getOneByUsername(this.username).subscribe({
         next : (user) => this.user = user,
         complete : () => this.displayInfo = true,

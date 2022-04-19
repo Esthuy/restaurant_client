@@ -1,9 +1,7 @@
 <div *ngIf="connected">
   <h2> Compte de {{username}}</h2>
   
-  <button *ngIf="!displayInfo" (click)="getInfoUser()">Afficher mes informations</button><br>
-  <button (click)="disconnection()" >Déconnection</button>
-
+  <button (click)="disconnection()" class="red">Déconnection</button><br>
 </div>
 
 
@@ -19,7 +17,8 @@
 
 
 <!-- Display user info if connected -->
-<div *ngIf="connected && displayInfo">
+<br>
+<div *ngIf="connected && displayInfo" class="info">
   <h3>Informations</h3>
     <table>
         <thead>
@@ -56,7 +55,7 @@
         <td> {{review.stars}}/5</td>
         <td> {{review.comment}}</td>
         <td> {{review.restaurant.name}}</td>
-        <td><button (click)="deleteReview(review.id)">Supprimer</button></td>
+        <td><button (click)="deleteReview(review.id)" class="red">Supprimer</button></td>
         <td><button (click)="goToRestaurant(review.restaurant.id)">Voir le restaurant</button></td>
         </tr>
       </tbody>
@@ -65,12 +64,12 @@
        
 <br>
 <h3>Favoris</h3>
-<div *ngIf="user.favorites.length > 0, else noFavorite">
-      <table class="favorites">
+<div *ngIf="user.favorites.length > 0, else noFavorite" >
+      <table class="favorites" >
         <tbody>
           <tr *ngFor="let favorite of user.favorites">
             <td>{{favorite.name}}</td>
-            <td><button (click)="deleteFavorite(favorite.id)">Supprimer</button></td>
+            <td><button (click)="deleteFavorite(favorite.id)" class="red">Supprimer</button></td>
             <td><button (click)="goToRestaurant(favorite.id)">Voir le restaurant</button></td>
           </tr>
         </tbody>
@@ -79,11 +78,14 @@
 </div>
 
 <ng-template #noFavorite>
+  <br>
   Vous n'avez pas encore de favoris, explorez nos restaurants pour en ajouter à votre liste ! 
 </ng-template>
 
 <ng-template #noReview>
+  <br>
   Vous n'avez pas encore donné d'avis sur un restaurant. 
+  <br>
 </ng-template>
 
 
@@ -91,7 +93,7 @@
 
 <!-- Display the login page -->
 <app-login *ngIf="!connected && connection"
-    (return) = "hideLogin()" ></app-login>
+    (return) = "hideLogin()"  ></app-login>
 
 
 <!-- Display the form to create an account -->

@@ -6,13 +6,27 @@ table {
     margin:  0px auto;
   }
   
-  th, td {
+th, td {
     text-align: left;
     padding: 16px;
   }
   
-  .favorites{
+.favorites{
     width: 20%;
-    margin:  0px auto;
+    margin: 0 auto;
+}
+
+.info{
+  width: 50%;
+  margin: 0px auto;
+}
+
+.red:hover{
+    background-color: rgb(243, 161, 128);
 }
  
+h3{
+  background-color: #faf9e8;
+  width: 80%;
+  margin: 0 auto;
+}
