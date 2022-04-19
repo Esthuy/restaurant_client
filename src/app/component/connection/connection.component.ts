@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Restaurant } from 'src/app/model/restaurant.model';
 import { User } from 'src/app/model/user.model';
 import { RestaurantService } from 'src/app/services/restaurant.service';
+import { ReviewService } from 'src/app/services/review.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +13,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ConnectionComponent implements OnInit {
 
-  constructor(private userService : UserService, private restaurantService : RestaurantService ,private router : Router ) {
+  constructor(private userService : UserService, private restaurantService : RestaurantService , private reviewService : ReviewService,
+    private router : Router ) {
     userService.obsUserIsConnected.subscribe(connected => this.connected = connected); 
     userService.obsUser.subscribe(username => this.username = username); 
    }
@@ -73,10 +75,15 @@ export class ConnectionComponent implements OnInit {
                 });
       },
     })
-    
   }
 
-  goToFavorite(id : number){
+  deleteReview(id : number){
+    this.reviewService.deleteReview(id).subscribe({
+      complete : () =>  this.getInfoUser(),
+    });
+  }
+
+  goToRestaurant(id : number){
     this.router.navigate(['restaurant', id]);
   }
 

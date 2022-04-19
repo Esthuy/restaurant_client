@@ -41,14 +41,16 @@ export class DisplayOneComponent implements OnInit {
     this.id = param_id ? parseInt(param_id) : -1;
 
     if( this.id && this.id > 0 )
-      restaurantService.getOneRestaurant(this.id).subscribe({
+     this.getRestaurant(this.id); 
+  }
+
+    getRestaurant(id : number){
+      this.restaurantService.getOneRestaurant(this.id).subscribe({
         next: (restaurant) => this.restaurant = restaurant,
-        error: (err) => router.navigateByUrl('/restaurants'), 
+        error: (err) => this.router.navigateByUrl('/restaurants'), 
         complete : () => this.ifFavoriteOf(),
       });
- 
-   
-  }
+    }
    
 
     displayReview(review : Review){
@@ -95,6 +97,7 @@ export class DisplayOneComponent implements OnInit {
                 this.reviewInsertForm.reset();  
               },
               error: err => alert("echec"),
+              complete: () => this.getRestaurant(this.id),
             }),
         }); 
     }

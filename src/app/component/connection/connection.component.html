@@ -57,6 +57,8 @@
         <td> {{review.stars}}/5</td>
         <td> {{review.comment}}</td>
         <td> {{review.restaurant.name}}</td>
+        <td><button (click)="deleteReview(review.id)">Supprimer</button></td>
+        <td><button (click)="goToRestaurant(review.restaurant.id)">Voir le restaurant</button></td>
         </tr>
       </tbody>
   </table>
@@ -70,7 +72,7 @@
           <tr *ngFor="let favorite of user.favorites">
             <td>{{favorite.name}}</td>
             <td><button (click)="deleteFavorite(favorite.id)">Supprimer</button></td>
-            <td><button (click)="goToFavorite(favorite.id)">Voir le restaurant</button></td>
+            <td><button (click)="goToRestaurant(favorite.id)">Voir le restaurant</button></td>
           </tr>
         </tbody>
     </table>
