@@ -26,14 +26,14 @@ export class CreateAccountComponent {
 
   onSubmit(){
     if(this.userInsertForm.valid){
-      this.userToAdd = this.userInsertForm.value;  
 
+      this.userToAdd = this.userInsertForm.value;  
       this.service.createUser(this.userToAdd).subscribe({
         complete: () => {
                   this.userInsertForm.reset();  
                   this.router.navigateByUrl('/homepage'); 
                 },
-        error: err => alert("echec"),
+        error: err => alert("Erreur, votre compte n'a pas pu être créé"),
       }); 
     }
   }

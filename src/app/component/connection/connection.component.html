@@ -1,16 +1,17 @@
-<h2>Connexion</h2>
+<div *ngIf="connected">
+  <h2> Compte de {{username}}</h2>
+  
+  <button *ngIf="!displayInfo" (click)="getInfoUser()">Afficher mes informations</button><br>
+  <button (click)="restaurants()">Voir les restaurants</button>
+  <button (click)="disconnection()" >Déconnection</button>
 
-<p *ngIf="connected">Vous êtes connecté {{username}} 
+</div>
 
-    <br><br>
-    <button *ngIf="!displayInfo" (click)="getInfoUser()">Afficher mes informations</button><br><br>
-    <button (click)="restaurants()">Voir les restaurants</button>
-    <button (click)="disconnection()" >Déconnection</button>
-</p>
 
 
 
 <div *ngIf="!connected && !connection && !createAccount">
+  <h2>Connexion</h2>
     <p>Vous n'êtes pas connecté, veuillez vous identifier ou créer un compte</p>
     <button (click)="login()">Se connecter</button>
     <button (click)="createUser()">Créer un compte</button>
@@ -55,7 +56,7 @@
         <td> {{review.title}} </td>
         <td> {{review.stars}}/5</td>
         <td> {{review.comment}}</td>
-        <td> nom du resto</td>
+        <td> {{review.restaurant.name}}</td>
         </tr>
       </tbody>
   </table>
