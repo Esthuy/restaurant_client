@@ -7,7 +7,8 @@ export const USER_INSERT_FORM = {
     'username': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30) , notBlank]), 
     'email' : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30) , notBlank, Validators.email]),
     'birthdate' :  new FormControl(null, [Validators.required, birthdateBeforeToday]), 
-    'password': new FormControl(null, Validators.required)
+    'password': new FormControl(null, Validators.required), 
+    'confirmationPassword' : new FormControl (null, Validators.required)
 }
 
 function notBlank(control : AbstractControl) : ValidationErrors | null {
@@ -27,6 +28,15 @@ function birthdateBeforeToday(control : AbstractControl) : ValidationErrors | nu
     }
     return{
         birthdateBeforeToday : {message: 'Date de naissance invalide'}
+    }
+}
+
+export function samePasswords(control : AbstractControl) : ValidationErrors | null {
+    if(control.value.password == control.value.confirmationPassword){
+        return null; 
+    }
+    return{
+        samePasswords : {message: 'Les deux mot de passes doivent être identiques'}
     }
 }
 

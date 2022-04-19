@@ -70,7 +70,9 @@ export class DisplayOneComponent implements OnInit {
     //If the user is connected, check if the restaurant is already in the user favorites list
     ifFavoriteOf(){
       if(this.connected){
-        if(this.restaurant.favoriteOf.find((user) => user.username = this.username) != null){
+        
+        if(this.restaurant.favoriteOf.find((user) => user.username == this.username) != null){
+         
           this.favorite = true; 
         }
       }

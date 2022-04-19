@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { USER_INSERT_FORM } from 'src/app/form/user.form';
+import { samePasswords, USER_INSERT_FORM } from 'src/app/form/user.form';
 import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -13,7 +13,8 @@ import { UserService } from 'src/app/services/user.service';
 export class CreateAccountComponent {
 
   constructor(private service : UserService, private router : Router, builder: FormBuilder) { 
-    this.userInsertForm = builder.group(USER_INSERT_FORM); 
+    this.userInsertForm = builder.group(USER_INSERT_FORM, {
+      validators : samePasswords}); 
   }
 
   userInsertForm : FormGroup; 
