@@ -5,6 +5,7 @@
     <br><br>
     <button *ngIf="!displayInfo" (click)="getInfoUser()">Afficher mes informations</button><br><br>
     <button (click)="restaurants()">Voir les restaurants</button>
+    <button (click)="disconnection()" >Déconnection</button>
 </p>
 
 
@@ -19,6 +20,7 @@
 
 <!-- Display user info if connected -->
 <div *ngIf="connected && displayInfo">
+  <h3>Informations</h3>
     <table>
         <thead>
         <tr>
@@ -38,25 +40,29 @@
         </tbody>
       </table>
 <br>
-        <h3>Avis</h3>
-      <table>
-          <thead>
-            <th scope="col">Titre</th>
-            <th scope="col">Nombres d'étoiles</th>
-            <th scope="col">Commentaire</th>
-            <th scope="col">Restaurant</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let review of user.reviews">
-            <td> {{review.title}} </td>
-            <td> {{review.stars}}/5</td>
-            <td> {{review.comment}}</td>
-            <td> nom du resto</td>
-            </tr>
-          </tbody>
-      </table>
+<div *ngIf="user.reviews.length > 0">
+  <h3>Avis</h3>
+  <table>
+      <thead>
+        <th scope="col">Titre</th>
+        <th scope="col">Nombres d'étoiles</th>
+        <th scope="col">Commentaire</th>
+        <th scope="col">Restaurant</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let review of user.reviews">
+        <td> {{review.title}} </td>
+        <td> {{review.stars}}/5</td>
+        <td> {{review.comment}}</td>
+        <td> nom du resto</td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+       
 <br>
-        <h3>Favoris</h3>
+<div *ngIf="user.favorites.length > 0">
+  <h3>Favoris</h3>
       <table class="favorites">
         <tbody>
           <tr *ngFor="let favorite of user.favorites">
@@ -66,6 +72,8 @@
           </tr>
         </tbody>
     </table>
+</div>
+        
     
 </div>
 

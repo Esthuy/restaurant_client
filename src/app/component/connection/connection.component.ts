@@ -22,7 +22,7 @@ export class ConnectionComponent implements OnInit {
   createAccount: boolean = false;
   displayInfo: boolean = false; 
 
-  username! : String;  
+  username! : string | null;  
   user!: User; 
   restaurant! : Restaurant;
 
@@ -48,10 +48,13 @@ export class ConnectionComponent implements OnInit {
   }
 
   getInfoUser(){
-    this.userService.getOneByUsername(this.username).subscribe({
-      next : (user) => this.user = user,
-      complete : () => this.displayInfo = true,
-    })
+    if(this.username != null){
+      this.userService.getOneByUsername(this.username).subscribe({
+        next : (user) => this.user = user,
+        complete : () => this.displayInfo = true,
+      })
+    }
+  
   }
 
   restaurants(){
@@ -75,6 +78,11 @@ export class ConnectionComponent implements OnInit {
 
   goToFavorite(id : number){
     this.router.navigate(['restaurant', id]);
+  }
+
+  disconnection(){
+    this.userService.disconnection(); 
+    this.displayInfo = false; 
   }
 
 }

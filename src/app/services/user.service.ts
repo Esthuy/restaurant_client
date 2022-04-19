@@ -12,13 +12,9 @@ export class UserService {
 
   constructor(private client: HttpClient) { }
 
-  connected : boolean =false;
-  username! : String; 
-
   obsUserIsConnected = new BehaviorSubject<boolean>(this.connected); 
 
-  obsUser = new BehaviorSubject<String>(this.username); 
-
+  obsUser = new BehaviorSubject<string | null>(this.username); 
 
 
 
@@ -33,8 +29,8 @@ export class UserService {
   }
 
   // GET ONE BY USERNAME
-  getOneByUsername(username : String) : Observable<User>{
-    return this.client.get<User>(this.BASE_URL + "/username/" + username.trim()); 
+  getOneByUsername(username : string) : Observable<User> {
+      return this.client.get<User>(this.BASE_URL + "/username/" + username.trim()); 
   }
 
 
@@ -54,8 +50,7 @@ export class UserService {
   }
 
 
-  connection(username : String, password : String){
-    this.username = username;
+  connection(username : string, password : String){
 
     const header = {
       headers: new HttpHeaders()
@@ -64,12 +59,29 @@ export class UserService {
     
     this.client.get(this.BASE_URL, header).subscribe({
       next: () => {
-        this.connected = true; 
+        localStorage.setItem('connected',JSON.stringify(this.connected)); 
+        localStorage.setItem('username', username); 
         this.obsUserIsConnected.next(this.connected);
+        this.obsUser.next(username); 
       },
       error: err => alert("Le pseudo ou le mot de passe est incorrect"),
     }); 
-
-    this.obsUser.next(this.username); 
   }
+
+  disconnection(){
+    localStorage.removeItem('connected'); 
+    localStorage.removeItem('username');
+    this.obsUserIsConnected.next(this.connected);
+    this.obsUser.next(null); 
+  }
+
+
+  get connected(){
+    return localStorage.getItem('connected') != null
+  }
+
+  get username() : string | null {
+    return localStorage.getItem('username') 
+  }
+
 }; 

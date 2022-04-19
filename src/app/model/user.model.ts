@@ -3,7 +3,7 @@ import { Review } from "./review.model";
 
 export interface User{
     id : number; 
-    username : String; 
+    username : string | null; 
     email : String;
     birthdate : Date; 
     reviews : Review[]; 

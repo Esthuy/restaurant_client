@@ -21,7 +21,7 @@ export class DisplayOneComponent implements OnInit {
   connected! : boolean; 
   favorite! : boolean; 
   reviewToDisplay! : Review |undefined; 
-  username! : String; 
+  username! : string | null; 
 
   reviewInsertForm : FormGroup; 
   reviewToAdd! : Review; 
@@ -82,7 +82,7 @@ export class DisplayOneComponent implements OnInit {
     }
 
     addReview(){
-      if(this.reviewInsertForm.valid){
+      if(this.reviewInsertForm.valid && this.username != null ){
         this.reviewToAdd = this.reviewInsertForm.value; 
         this.reviewToAdd.restaurant = this.restaurant; 
         
@@ -101,20 +101,21 @@ export class DisplayOneComponent implements OnInit {
 
 
   addToFavorites(){
-    this.userService.getOneByUsername(this.username).subscribe({
-      next : (user) => {
-        this.user = user,
-        this.restaurant.favoriteOf.push(this.user),
-        this.restaurantService.updateRestaurant(this.restaurant.id, this.restaurant).subscribe({
-           next : (restaurant) => this.restaurant = restaurant,
-           complete : () => {
-              alert("Le restaurant a bien été ajouté à vos favoris");
-              this.favorite = true; 
-        }
-        });
-    },
-      error : err => alert("echec"),
-     })
+    if(this.username != null)
+      this.userService.getOneByUsername(this.username).subscribe({
+        next : (user) => {
+          this.user = user,
+          this.restaurant.favoriteOf.push(this.user),
+          this.restaurantService.updateRestaurant(this.restaurant.id, this.restaurant).subscribe({
+            next : (restaurant) => this.restaurant = restaurant,
+            complete : () => {
+                alert("Le restaurant a bien été ajouté à vos favoris");
+                this.favorite = true; 
+          }
+          });
+      },
+        error : err => alert("echec"),
+      })
   }
 
     
