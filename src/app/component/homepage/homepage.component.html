@@ -1,21 +1,41 @@
 
 
-<h3>Bienvenue</h3>
-
-<button (click)="login()" *ngIf="!connected"> Se connecter/ s'inscrire </button>
-<button (click)="login()" *ngIf="connected"> Mon compte </button>
-
-<button (click)="restaurants()">Voir les restaurants</button>
-
-
+<br>
+<div>
+     <img src="assets/img/burger.jpg" alt="Burger" width="500" height="300">
+     <img src="assets/img/pates.jpg" alt="Pâtes" width="500" height="300">
+     <img src="assets/img/lasagne.png" alt="Pâtes" width="500" height="300">
+</div>
 
 
-<h2>TODO d'Estelle</h2>
-<ul>
-    <li>Améliorer navigation</li>
-    <li>Photo resto ? </li>
-    <li>Consolider validation pour ne pas ajouter deux fois le même resto ou même user</li>
-</ul>
+  
+ 
+  
+  <div>
+    <h3>Bienvenue sur le meilleur comparateur de restaurant ! </h3>
+
+    <p>
+        Ici vous pouvez trouver des avis sur les meilleurs restaurants du monde, et ajouter vous même votre avis si vous le souhaitez. <br>
+        Votre restaurant preferez n'est pas présent sur notre site ? Pas de problème, vous pouvez l'ajouter vous même via le bouton "ajouter un restaurant". <br>
+   
+        Notre merveilleux site vous propose également d'ajouter vos restaurant préferé à votre liste de favoris ! 
+    </p><br>
+
+    <button (click)="login()" *ngIf="!connected"> Se connecter/ s'inscrire </button>
+    <button (click)="login()" *ngIf="connected"> Mon compte </button>
+    
+    <button (click)="restaurants()">Voir les restaurants</button>
+         
+    
+    
+    <h2>TODO d'Estelle</h2>
+    <ul>
+        <li>Photo resto ? </li>
+        <li>Consolider validation pour ne pas ajouter deux fois le même resto ou même user</li>
+        <li>Afficher les infos directement si utilisateur connecté ? </li>
+    </ul>
+  </div>
+
 
 
 

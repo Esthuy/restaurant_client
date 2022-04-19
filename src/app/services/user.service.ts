@@ -28,6 +28,7 @@ export class UserService {
     return this.client.get<User>(this.BASE_URL + "/" + id)
   }
 
+
   // GET ONE BY USERNAME
   getOneByUsername(username : string) : Observable<User> {
       return this.client.get<User>(this.BASE_URL + "/username/" + username.trim()); 

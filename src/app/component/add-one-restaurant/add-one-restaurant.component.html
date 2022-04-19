@@ -67,6 +67,7 @@
             {{ restaurantInsertForm.controls['phoneNumber'].errors?.['notBlank'].message }} 
         </p>
         <p *ngIf="restaurantInsertForm.controls['phoneNumber'].errors?.['maxlength'] " class="errors">La longueur maximum est de 20 caractères</p><br>
+        <p *ngIf="restaurantInsertForm.controls['phoneNumber'].errors?.['minlength'] " class="errors">La longueur minimum est de 6 caractères</p><br>
     </div>
 
    
