@@ -25,7 +25,17 @@ export class RestaurantService {
 
   // GET BY NAME
   getByName(name : string): Observable<Restaurant[]>{
-    return this.client.get<Restaurant[]>(this.BASE_URL + "/search/" + name)
+    return this.client.get<Restaurant[]>(this.BASE_URL + "/searchByName/" + name)
+  }
+
+  // GET BY ADDRESS
+  getByAddress(address : string): Observable<Restaurant[]>{
+    return this.client.get<Restaurant[]>(this.BASE_URL + "/searchByAddress/" + address)
+  }
+
+  // GET BY TYPE OF FOOD
+  getByTypeOfFood(typeOfFood : string): Observable<Restaurant[]>{
+    return this.client.get<Restaurant[]>(this.BASE_URL + "/searchByTypeOfFood/" + typeOfFood)
   }
 
   // POST

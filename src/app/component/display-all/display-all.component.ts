@@ -17,10 +17,14 @@ export class DisplayAllComponent  {
   restaurants: Restaurant[] = [];
   users: User[] = []; 
   reviews: Review[] =[]; 
-  restaurantName: string = ""; 
+
+  input: string = ""; 
+  searchType: string = "name"; 
+  orderStr: string = "asc";
+
   nbRestaurant: number = 0; 
   displayReset: boolean = false; 
-  orderStr: string = "asc";
+
 
 
 
@@ -42,6 +46,7 @@ export class DisplayAllComponent  {
     });
   }
 
+  
   getUsers(){
     this.serviceUser.getUsers()
     .subscribe({
@@ -58,9 +63,11 @@ export class DisplayAllComponent  {
     });
   }
 
+
   displayRestaurant(restaurant : Restaurant){
     this.router.navigate(['restaurant', restaurant.id]);
   }
+
 
   deleteRestaurant(restaurant: Restaurant){
     if(confirm("Êtes vous sur de vouloir supprimer ce restaurant ?")){
@@ -70,31 +77,81 @@ export class DisplayAllComponent  {
     } ;
   }
 
+
   addOneRestaurant(){
     this.router.navigateByUrl("/add"); 
   }
 
+
   search(){
-    if(this.restaurantName.trim() == ""){
+    if(this.input.trim() == ""){
       this.getRestaurants(); 
     } else {
-      this.service.getByName(this.restaurantName).subscribe({
-        next: restaurantsList => this.restaurants = restaurantsList,
-        complete : () => {
-          this.order()
-          if(this.restaurants.length < this.nbRestaurant){
-            this.displayReset = true; 
-          }
-        },
-        error: err => alert("echec"),
-      });
+      switch( this.searchType){
+        case "name":{
+          this.service.getByName(this.input).subscribe({
+            next: restaurantsList => this.restaurants = restaurantsList,
+
+            complete : () => {
+              this.order()
+
+              if(this.restaurants.length < this.nbRestaurant){
+                this.displayReset = true; 
+              }
+            },
+
+            error: err => alert("echec"),
+          });
+
+          break;
+        }
+
+        case "address": {
+          this.service.getByAddress(this.input).subscribe({
+            next: restaurantsList => this.restaurants = restaurantsList,
+
+            complete : () => {
+              this.order()
+
+              if(this.restaurants.length < this.nbRestaurant){
+                this.displayReset = true; 
+              }
+            },
+
+            error: err => alert("echec"),
+          });
+
+          break; 
+        }
+
+        case "typeOfFood": {
+          this.service.getByTypeOfFood(this.input).subscribe({
+            next: restaurantsList => this.restaurants = restaurantsList,
+
+            complete : () => {
+              this.order()
+
+              if(this.restaurants.length < this.nbRestaurant){
+                this.displayReset = true; 
+              }
+            },
+
+            error: err => alert("echec"),
+          });
+
+          break; 
+        }
+      }
     }
   }
+
 
   reset(){
     this.getRestaurants(); 
     this.displayReset = false; 
+    this.input = ""; 
   }
+
 
   order(){
     if(this.orderStr === "desc"){

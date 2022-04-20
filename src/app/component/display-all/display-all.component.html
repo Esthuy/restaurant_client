@@ -1,7 +1,14 @@
 <h2>Restaurants</h2>
 
+<label>Rechercher par : </label>
+<select [(ngModel)]="searchType">
+    <option value="name">Nom</option>
+    <option value="address">Adresse</option>
+    <option value="typeOfFood">Type de nourriture</option>
+</select>
+
 <div> 
-  <input type="text" [(ngModel)]="restaurantName">
+  <input type="text" [(ngModel)]="input">
   <button (click)="search()">Rechercher</button><br><br>
   <button *ngIf="displayReset" (click)="reset()">Afficher la liste complète</button>
 </div><br>
