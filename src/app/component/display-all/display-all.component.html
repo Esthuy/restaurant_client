@@ -1,5 +1,12 @@
 <h2>Restaurants</h2>
 
+<div> 
+  <input type="text" [(ngModel)]="restaurantName">
+  <button (click)="search()">Rechercher</button><br><br>
+  <button *ngIf="displayReset" (click)="reset()">Afficher la liste complète</button>
+</div><br>
+
+
 <table>
   <thead>
   <tr>

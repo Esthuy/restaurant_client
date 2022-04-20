@@ -17,6 +17,10 @@ export class DisplayAllComponent  {
   restaurants: Restaurant[] = [];
   users: User[] = []; 
   reviews: Review[] =[]; 
+  restaurantName: string = ""; 
+  nbRestaurant: number = 0; 
+  displayReset: boolean = false; 
+
 
 
   constructor(private service : RestaurantService, private serviceUser : UserService ,private serviceReview : ReviewService ,private router : Router) { 
@@ -29,6 +33,7 @@ export class DisplayAllComponent  {
     this.service.getRestaurants()
     .subscribe({
       next: restaurantsList => this.restaurants = restaurantsList,
+      complete: () => this.nbRestaurant = this.restaurants.length,
       error: err => alert("echec"),
     });
   }
@@ -63,5 +68,28 @@ export class DisplayAllComponent  {
 
   addOneRestaurant(){
     this.router.navigateByUrl("/add"); 
+  }
+
+  search(){
+    if(this.restaurantName.trim() == ""){
+      this.getRestaurants(); 
+    } else {
+      this.service.getByName(this.restaurantName).subscribe({
+        next: restaurantsList => this.restaurants = restaurantsList,
+        complete : () => {
+          if(this.restaurants.length < this.nbRestaurant){
+            this.displayReset = true; 
+          }
+        },
+        error: err => alert("echec"),
+      });
+    }
+
+    
+  }
+
+  reset(){
+    this.getRestaurants(); 
+    this.displayReset = false; 
   }
 }

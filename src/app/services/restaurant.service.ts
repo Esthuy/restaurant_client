@@ -23,6 +23,11 @@ export class RestaurantService {
     return this.client.get<Restaurant>(this.BASE_URL + "/" + id)
   }
 
+  // GET BY NAME
+  getByName(name : string): Observable<Restaurant[]>{
+    return this.client.get<Restaurant[]>(this.BASE_URL + "/search/" + name)
+  }
+
   // POST
   createRestaurant(restaurant : Restaurant){
     return this.client.post<Restaurant>(this.BASE_URL + "/add" , restaurant);
