@@ -33,12 +33,12 @@
             {{user.username}}
           </td>
 
-          <td>{{user.birthdate}}</td>
+          <td>{{user.birthdate | date: 'shortDate'}}</td>
 
           <td>{{user.email}}</td>
         </tbody>
       </table>
-<br>
+<br><br>
 
 <h3>Avis</h3>
 <div *ngIf="user.reviews.length > 0, else noReview">
@@ -62,7 +62,7 @@
   </table>
 </div>
        
-<br>
+<br><br>
 <h3>Favoris</h3>
 <div *ngIf="user.favorites.length > 0, else noFavorite" >
       <table class="favorites" >

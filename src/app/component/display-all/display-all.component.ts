@@ -20,6 +20,7 @@ export class DisplayAllComponent  {
   restaurantName: string = ""; 
   nbRestaurant: number = 0; 
   displayReset: boolean = false; 
+  orderStr: string = "asc";
 
 
 
@@ -33,7 +34,10 @@ export class DisplayAllComponent  {
     this.service.getRestaurants()
     .subscribe({
       next: restaurantsList => this.restaurants = restaurantsList,
-      complete: () => this.nbRestaurant = this.restaurants.length,
+      complete: () => {
+        this.order(),
+        this.nbRestaurant = this.restaurants.length
+      },
       error: err => alert("echec"),
     });
   }
@@ -77,6 +81,7 @@ export class DisplayAllComponent  {
       this.service.getByName(this.restaurantName).subscribe({
         next: restaurantsList => this.restaurants = restaurantsList,
         complete : () => {
+          this.order()
           if(this.restaurants.length < this.nbRestaurant){
             this.displayReset = true; 
           }
@@ -84,12 +89,19 @@ export class DisplayAllComponent  {
         error: err => alert("echec"),
       });
     }
-
-    
   }
 
   reset(){
     this.getRestaurants(); 
     this.displayReset = false; 
   }
+
+  order(){
+    if(this.orderStr === "desc"){
+      this.restaurants = this.restaurants.sort((resto1, resto2) => resto2.name.localeCompare(resto1.name)); 
+    } else {
+      this.restaurants = this.restaurants.sort((resto1, resto2) => resto1.name.localeCompare(resto2.name)); 
+    }
+  }
+
 }

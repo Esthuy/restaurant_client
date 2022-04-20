@@ -6,11 +6,16 @@
   <button *ngIf="displayReset" (click)="reset()">Afficher la liste complète</button>
 </div><br>
 
+<label>Trier par : </label>
+<select [(ngModel)]="orderStr" (change)="order()">
+    <option value="asc">a-z</option>
+    <option value="desc">z-a</option>
+</select><br><br>
+
 
 <table>
   <thead>
   <tr>
-    <th scope="col">#</th>
     <th scope="col">Nom</th>
     <th scope="col">Type de nourriture</th>
     <th scope="col">Adresse</th>
@@ -19,7 +24,6 @@
   </thead>
   <tbody>
   <tr *ngFor="let restaurant of restaurants; index as i">
-    <th scope="row">{{ i + 1 }}</th>
     <td>
       {{ restaurant.name }}
     </td>
