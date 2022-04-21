@@ -23,7 +23,7 @@
           <td>{{ restaurant.description }}</td>
           <td>{{ restaurant.typeOfFood }}</td>
           <td>{{ restaurant.favoriteOf.length }} personnes</td>
-          <td *ngIf="restaurant.starAverage != 100, else noReview">{{ restaurant.starAverage }}/5</td>
+          <td *ngIf="restaurant.starAverage != -1 , else noReview">{{ restaurant.starAverage }}/5</td>
         </tbody>
       </table><br>
 

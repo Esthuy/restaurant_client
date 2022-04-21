@@ -101,7 +101,8 @@ export class DisplayAllComponent  {
             next: restaurantsList => this.restaurants = restaurantsList,
 
             complete : () => {
-              this.order()
+              this.order(), 
+              this.getStarAverage()
 
               if(this.restaurants.length < this.nbRestaurant){
                 this.displayReset = true; 
@@ -121,7 +122,8 @@ export class DisplayAllComponent  {
             next: restaurantsList => this.restaurants = restaurantsList,
 
             complete : () => {
-              this.order()
+              this.order(),
+              this.getStarAverage()
 
               if(this.restaurants.length < this.nbRestaurant){
                 this.displayReset = true; 
@@ -139,7 +141,8 @@ export class DisplayAllComponent  {
             next: restaurantsList => this.restaurants = restaurantsList,
 
             complete : () => {
-              this.order()
+              this.order(),
+              this.getStarAverage()
 
               if(this.restaurants.length < this.nbRestaurant){
                 this.displayReset = true; 
@@ -165,10 +168,15 @@ export class DisplayAllComponent  {
 
   order(){
     if(this.orderStr === "desc"){
-      this.restaurants = this.restaurants.sort((resto1, resto2) => resto2.name.localeCompare(resto1.name)); 
-    } else {
-      this.restaurants = this.restaurants.sort((resto1, resto2) => resto1.name.localeCompare(resto2.name)); 
+      this.restaurants = this.restaurants.sort((rest1, rest2) => rest2.name.localeCompare(rest1.name)); 
+    } else if (this.orderStr ==="asc"){
+      this.restaurants = this.restaurants.sort((rest1, rest2) => rest1.name.localeCompare(rest2.name)); 
+    }else {
+      this.restaurants = this.restaurants.sort((rest1, rest2) => rest2.starAverage - rest1.starAverage);
     }
   }
+
+
+   
 
 }

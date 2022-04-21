@@ -19,6 +19,7 @@
 <select [(ngModel)]="orderStr" (change)="order()" >
     <option value="asc">a-z</option>
     <option value="desc">z-a</option>
+    <option value="star">Mieux cotés</option>
 </select><br><br>
 
 
@@ -39,7 +40,7 @@
     </td>
     <td>{{ restaurant.typeOfFood}}</td>
     <td>{{ restaurant.address }}</td>
-    <td *ngIf="restaurant.starAverage != 100, else noReview">{{restaurant.starAverage}}/5</td>
+    <td *ngIf="restaurant.starAverage != -1, else noReview">{{restaurant.starAverage}}/5</td>
     
     <td> <button (click)="displayRestaurant(restaurant)">Afficher</button><br></td>
   </tr>

@@ -43,14 +43,16 @@ export class DisplayOneComponent implements OnInit {
 
     if( this.id && this.id > 0 )
      this.getRestaurant(); 
-     this.getStarAverage(); 
   }
 
     getRestaurant(){
       this.restaurantService.getOneRestaurant(this.id).subscribe({
         next: (restaurant) => this.restaurant = restaurant,
         error: (err) => this.router.navigateByUrl('/restaurants'), 
-        complete : () => this.ifFavoriteOf(),
+        complete : () => {
+          this.ifFavoriteOf(),
+          this.getStarAverage()
+        }
       });
     }
    
