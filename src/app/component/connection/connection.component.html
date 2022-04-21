@@ -18,8 +18,9 @@
 
 <!-- Display user info if connected -->
 <br>
+<div *ngIf="connected && user != null">
 <h3>Informations</h3>
-<div *ngIf="connected && displayInfo" class="info">
+<div class="info">
     <table>
         <thead>
         <tr>
@@ -79,6 +80,9 @@
     </table>
 </div>
 
+<br><br><br>
+<button (click)="deleteAccount()"  class="red">Supprimer mon compte</button>
+</div>
 
 <ng-template #noFavorite>
   <br>

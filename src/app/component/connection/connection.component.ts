@@ -27,7 +27,7 @@ export class ConnectionComponent implements OnInit {
   connected!: boolean;
   connection: boolean = false; 
   createAccount: boolean = false;
-  displayInfo: boolean = false; 
+ 
 
   username! : string | null;  
   user!: User; 
@@ -39,34 +39,49 @@ export class ConnectionComponent implements OnInit {
     this.connection = true; 
   }
 
+
   createUser(){
     this.createAccount = true; 
   }
+
 
   hideLogin(){
     this.connection = false; 
   }
 
+
   hideCreateAccount(){
     this.createAccount = false; 
   }
 
+
   ngOnInit(): void {
   }
+
 
   getInfoUser(){
     if(this.username != null){ 
       this.userService.getOneByUsername(this.username).subscribe({
         next : (user) => this.user = user,
-        complete : () => this.displayInfo = true,
       })
     }
   
   }
 
+  deleteAccount(){
+    if(confirm("Êtes-vous sûr de vouloir surrpimer votre compte ? Vos avis seront également supprimés")){
+      this.disconnection(); 
+      this.userService.deleteUser(this.user.id).subscribe({
+        complete : () => alert('Votre compte à bien été supprimé, nous esperons vous revoir bientôt !'),
+      })
+    }
+  }
+
+
   restaurants(){
     this.router.navigateByUrl('/restaurants'); 
   }
+
 
   deleteFavorite(id : number){
     this.restaurantService.getOneRestaurant(id).subscribe({
@@ -82,19 +97,22 @@ export class ConnectionComponent implements OnInit {
     })
   }
 
+
   deleteReview(id : number){
     this.reviewService.deleteReview(id).subscribe({
       complete : () =>  this.getInfoUser(),
     });
   }
 
+
   goToRestaurant(id : number){
     this.router.navigate(['restaurant', id]);
   }
 
+
   disconnection(){
     this.userService.disconnection(); 
-    this.displayInfo = false; 
   }
+
 
 }
