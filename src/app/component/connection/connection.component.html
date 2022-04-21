@@ -19,7 +19,7 @@
 <!-- Display user info if connected -->
 <br>
 <div *ngIf="connected && user != null">
-<h3>Informations</h3>
+<h3>Informations</h3><br>
 <div class="info">
     <table>
         <thead>
@@ -42,7 +42,7 @@
 </div>
 <br><br>
 
-<h3>Avis</h3>
+<h3>Avis</h3><br>
 <div *ngIf="user.reviews.length > 0, else noReview">
   <table>
       <thead>
@@ -67,7 +67,7 @@
 </div>
        
 <br><br>
-<h3>Favoris</h3>
+<h3>Favoris</h3><br>
 <div *ngIf="user.favorites.length > 0, else noFavorite" >
       <table class="favorites" >
         <tbody>
@@ -85,13 +85,11 @@
 </div>
 
 <ng-template #noFavorite>
-  <br>
   Vous n'avez pas encore de favoris, explorez nos restaurants pour en ajouter à votre liste ! 
 </ng-template>
 
 
 <ng-template #noReview>
-  <br>
   Vous n'avez pas encore donné d'avis sur un restaurant. 
   <br>
 </ng-template>
