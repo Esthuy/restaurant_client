@@ -1,24 +1,26 @@
 table {
     border-collapse: collapse;
     border-spacing: 0;
-    width:80%;
+    width:70%;
     border: 1px solid #ddd;
-    margin:  0px auto;
+    margin:  0 auto;
   }
   
 th, td {
     text-align: left;
     padding: 16px;
+    width: fit-content;
   }
-  
+   
 .favorites{
     width: 20%;
     margin: 0 auto;
 }
 
+
 .info{
-  width: 50%;
-  margin: 0px auto;
+  width: 40%;
+  margin: 0 auto;
 }
 
 .red:hover{
@@ -27,6 +29,6 @@ th, td {
  
 h3{
   background-color: #faf9e8;
-  width: 80%;
   margin: 0 auto;
+  width: 15%;
 }
