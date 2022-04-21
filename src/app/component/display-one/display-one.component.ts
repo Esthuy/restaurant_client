@@ -23,6 +23,7 @@ export class DisplayOneComponent implements OnInit {
   reviewToDisplay! : Review |undefined; 
   username! : string | null; 
 
+
   reviewInsertForm : FormGroup; 
   reviewToAdd! : Review; 
 
@@ -41,10 +42,11 @@ export class DisplayOneComponent implements OnInit {
     this.id = param_id ? parseInt(param_id) : -1;
 
     if( this.id && this.id > 0 )
-     this.getRestaurant(this.id); 
+     this.getRestaurant(); 
+     this.getStarAverage(); 
   }
 
-    getRestaurant(id : number){
+    getRestaurant(){
       this.restaurantService.getOneRestaurant(this.id).subscribe({
         next: (restaurant) => this.restaurant = restaurant,
         error: (err) => this.router.navigateByUrl('/restaurants'), 
@@ -66,6 +68,12 @@ export class DisplayOneComponent implements OnInit {
 
     return(){
       this.router.navigateByUrl('/restaurants');
+    }
+
+    getStarAverage(){
+      this.restaurantService.getStarAverage(this.id).subscribe({
+        next : average => this.restaurant.starAverage = average,
+      }); 
     }
 
        
@@ -97,7 +105,10 @@ export class DisplayOneComponent implements OnInit {
                 this.reviewInsertForm.reset();  
               },
               error: err => alert("echec"),
-              complete: () => this.getRestaurant(this.id),
+              complete: () => {
+                this.getRestaurant(),
+                this.getStarAverage()
+              },
             }),
         }); 
     }

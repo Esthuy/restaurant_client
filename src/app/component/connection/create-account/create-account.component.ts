@@ -34,8 +34,6 @@ export class CreateAccountComponent {
                   this.router.navigateByUrl('/homepage'); 
                 },
         error: (error) => alert(error.error.message),
-       
-        
       }); 
     }
   }

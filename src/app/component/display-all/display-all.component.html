@@ -28,6 +28,7 @@
     <th scope="col">Nom</th>
     <th scope="col">Type de nourriture</th>
     <th scope="col">Adresse</th>
+    <th scope="col">Moyenne des avis</th>
     <th scope="col">Voir plus</th>
   </tr>
   </thead>
@@ -38,6 +39,8 @@
     </td>
     <td>{{ restaurant.typeOfFood}}</td>
     <td>{{ restaurant.address }}</td>
+    <td *ngIf="restaurant.starAverage != 100, else noReview">{{restaurant.starAverage}}/5</td>
+    
     <td> <button (click)="displayRestaurant(restaurant)">Afficher</button><br></td>
   </tr>
   </tbody>
@@ -47,22 +50,10 @@
 <br><br>
 <button (click)="addOneRestaurant()">Ajouter un restaurant</button>
 
+<ng-template #noReview>
+  <br>
+  Ce restaurant n'a pas d'avis
+</ng-template>
 
 
-
-<!-- 
-  <div> Utilisateurs
-    <p *ngFor="let user of users">
-         {{user.id}} - {{user.username}} <br>
-         {{user.email}}
-    </p>
-  </div><br>
-
-  <div> Avis
-    <p *ngFor="let review of reviews">
-         {{review.id}} - {{review.title}} <br>
-         {{review.user.username}} - {{review.restaurant.name}}
-    </p>
-  </div>
- -->
 

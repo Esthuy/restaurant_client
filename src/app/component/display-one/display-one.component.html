@@ -13,17 +13,24 @@
           <th scope="col">Description</th>
           <th scope="col">Type de nourriture</th>
           <th scope="col">Favoris de </th>
+          <th scope="col">Moyenne des avis</th>
         </tr>
         </thead>
         <tbody>
-          <td>{{restaurant.name}}</td>
+          <td>{{ restaurant.name }}</td>
           <td>{{ restaurant.address }}</td>
           <td>{{ restaurant.phoneNumber}}</td>
           <td>{{ restaurant.description }}</td>
-          <td>{{ restaurant.typeOfFood}}</td>
-          <td>{{ restaurant.favoriteOf.length}} personnes</td>
+          <td>{{ restaurant.typeOfFood }}</td>
+          <td>{{ restaurant.favoriteOf.length }} personnes</td>
+          <td *ngIf="restaurant.starAverage != 100, else noReview">{{ restaurant.starAverage }}/5</td>
         </tbody>
       </table><br>
+
+    <ng-template #noReview>
+      <br>
+      Ce restaurant n'a pas d'avis
+    </ng-template>
 
 
 <!-- Display the reviews of this restaurant -->

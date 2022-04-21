@@ -1,3 +1,4 @@
+import { ReturnStatement } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Restaurant } from 'src/app/model/restaurant.model';
@@ -31,7 +32,7 @@ export class DisplayAllComponent  {
   constructor(private service : RestaurantService, private serviceUser : UserService ,private serviceReview : ReviewService ,private router : Router) { 
     this.getRestaurants(); 
     this.getUsers(); 
-    this.getReviews(); 
+    this.getReviews();
   }
 
   getRestaurants(){
@@ -40,12 +41,19 @@ export class DisplayAllComponent  {
       next: restaurantsList => this.restaurants = restaurantsList,
       complete: () => {
         this.order(),
-        this.nbRestaurant = this.restaurants.length
+        this.nbRestaurant = this.restaurants.length, 
+        this.getStarAverage(); 
       },
       error: err => alert("echec"),
     });
   }
 
+  getStarAverage(){
+    this.restaurants.forEach( restaurant =>
+      this.service.getStarAverage(restaurant.id).subscribe({
+        next : average => restaurant.starAverage = average,
+      }));
+  }
   
   getUsers(){
     this.serviceUser.getUsers()

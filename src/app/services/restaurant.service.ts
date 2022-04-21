@@ -38,6 +38,11 @@ export class RestaurantService {
     return this.client.get<Restaurant[]>(this.BASE_URL + "/searchByTypeOfFood/" + typeOfFood)
   }
 
+  // GET STAR AVERAGE
+  getStarAverage(id : number): Observable<number> {
+    return this.client.get<number>(this.BASE_URL + "/stars/" + id)
+  }
+
   // POST
   createRestaurant(restaurant : Restaurant){
     return this.client.post<Restaurant>(this.BASE_URL + "/add" , restaurant);

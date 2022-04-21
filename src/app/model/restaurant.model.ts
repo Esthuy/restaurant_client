@@ -10,5 +10,6 @@ export interface Restaurant {
     phoneNumber: string; 
     reviews: Review[]; 
     favoriteOf : User[]; 
+    starAverage : number; 
 
 }
