@@ -1,11 +1,13 @@
 <h2>Restaurants</h2>
 
+<div>
 <label>Rechercher par : </label>
-<select [(ngModel)]="searchType">
+<select [(ngModel)]="searchType" >
     <option value="name">Nom</option>
     <option value="address">Adresse</option>
     <option value="typeOfFood">Type de nourriture</option>
 </select>
+</div>
 
 <div> 
   <input type="text" [(ngModel)]="input">
@@ -14,7 +16,7 @@
 </div><br>
 
 <label>Trier par : </label>
-<select [(ngModel)]="orderStr" (change)="order()">
+<select [(ngModel)]="orderStr" (change)="order()" >
     <option value="asc">a-z</option>
     <option value="desc">z-a</option>
 </select><br><br>

@@ -97,6 +97,8 @@ export class DisplayAllComponent  {
 
               if(this.restaurants.length < this.nbRestaurant){
                 this.displayReset = true; 
+              }else{
+                this.displayReset = false; 
               }
             },
 

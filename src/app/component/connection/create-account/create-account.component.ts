@@ -33,7 +33,9 @@ export class CreateAccountComponent {
                   this.userInsertForm.reset();  
                   this.router.navigateByUrl('/homepage'); 
                 },
-        error: err => alert("Erreur, votre compte n'a pas pu être créé"),
+        error: (error) => alert(error.error.message),
+       
+        
       }); 
     }
   }
