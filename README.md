@@ -2,7 +2,7 @@
 
 This project is a restaurant comparator. Where the user can create an account and add reviews to restaurants. This application also allows users to add a restaurant to their favorites list, add a new restaurant to the list and display the restaurants by rates or alphabetic order.
 
-Here is the front with Angular, and the back on Java is availabe here :
+Here is the front with Angular, and the back on Java is availabe here : https://github.com/Esthuy/restaurant
 
 ## Development server
 
